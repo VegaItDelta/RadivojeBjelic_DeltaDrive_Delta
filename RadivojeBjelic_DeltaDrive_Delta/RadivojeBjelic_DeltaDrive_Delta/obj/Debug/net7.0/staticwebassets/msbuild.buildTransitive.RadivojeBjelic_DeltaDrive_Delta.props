@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/RadivojeBjelic_DeltaDrive_Delta.props" />
+</Project>
