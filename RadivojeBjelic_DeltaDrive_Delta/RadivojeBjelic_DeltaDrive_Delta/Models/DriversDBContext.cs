@@ -2,14 +2,13 @@
 using CsvHelper;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using System.Reflection.Emit;
 
 namespace RadivojeBjelic_DeltaDrive_Delta.Models
 {
     public class DriversDBContext : DbContext
     {
         List<Driver> drivers = new List<Driver>();
-        List<Vehicle> vehicles = new List<Vehicle>();
-        List<Location> locations = new List<Location>();
 
         public DriversDBContext(DbContextOptions<DriversDBContext> options)
             : base(options) { }
@@ -19,19 +18,80 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
             builder.ApplyConfigurationsFromAssembly(typeof(DriversDBContext).Assembly);
             InitializeAndSeedDatabase(@"./data/delta-drive.csv");
 
-            builder.Entity<Location>().ToTable("Locations");
-            builder.Entity<Location>().HasData(locations);
-
-            builder.Entity<Vehicle>().ToTable("Vehicles");
-            builder.Entity<Vehicle>().HasData(vehicles);
-
             builder.Entity<Driver>().ToTable("Drivers");
             builder.Entity<Driver>().HasData(drivers);
+
+            builder.Entity<Passenger>()
+                .HasIndex(p => p.Email)
+                .IsUnique();
+
+            builder.Entity<Passenger>().HasData(
+                new Passenger()
+                {
+                    PassengerId = Guid.NewGuid(),
+                    Email = "raca93@gmail.com",
+                    PassengerName = "Radivoje",
+                    PassengerLastname = "Bjelic",
+                    PassengersLatitude = 45.29056828768189,
+                    PassengersLongitude = 19.924187873005126,
+                    Birthday = new DateTime(1993, 6, 22)
+                },
+                new Passenger()
+                {
+                    PassengerId = Guid.NewGuid(),
+                    Email = "ana@example.com",
+                    PassengerName = "Ana",
+                    PassengerLastname = "Ivanovic",
+                    PassengersLatitude = 44.78656828768189,
+                    PassengersLongitude = 20.448921673005126,
+                    Birthday = new DateTime(1987, 11, 6)
+                },
+                new Passenger()
+                {
+                    PassengerId = Guid.NewGuid(),
+                    Email = "marko@example.com",
+                    PassengerName = "Marko",
+                    PassengerLastname = "Petrovic",
+                    PassengersLatitude = 43.320902228768189,
+                    PassengersLongitude = 21.895758973005126,
+                    Birthday = new DateTime(1990, 5, 15)
+                },
+                new Passenger()
+                {
+                    PassengerId = Guid.NewGuid(),
+                    Email = "jelena@example.com",
+                    PassengerName = "Jelena",
+                    PassengerLastname = "Jankovic",
+                    PassengersLatitude = 44.012793528768189,
+                    PassengersLongitude = 20.91142273005126,
+                    Birthday = new DateTime(1992, 3, 22)
+                },
+                new Passenger()
+                {
+                    PassengerId = Guid.NewGuid(),
+                    Email = "nikola@example.com",
+                    PassengerName = "Nikola",
+                    PassengerLastname = "Nikolic",
+                    PassengersLatitude = 45.267135228768189,
+                    PassengersLongitude = 19.833549673005126,
+                    Birthday = new DateTime(1985, 8, 30)
+                },
+                new Passenger()
+                {
+                    PassengerId = Guid.NewGuid(),
+                    Email = "marija@example.com",
+                    PassengerName = "Marija",
+                    PassengerLastname = "Maric",
+                    PassengersLatitude = 44.01652128768189,
+                    PassengersLongitude = 21.00585973005126,
+                    Birthday = new DateTime(1994, 12, 10)
+                }
+
+            );
         }
 
         public DbSet<Driver> Drivers { get; set; }
-        public DbSet<Location> Locations { get; set; }
-        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet <Passenger> Passengers { get; set; }
 
         private void InitializeAndSeedDatabase(string csvFilePath)
         {
@@ -73,28 +133,8 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
                         Longitude = driveRowObject.Longitude,
                         PricePerKM = Convert.ToDecimal(driveRowObject.PricePerKM.Replace("EUR", "")),
                         StartPrice = Convert.ToDecimal(driveRowObject.StartPrice.Replace("EUR", ""))
-                        //Location = location,
-                        //Vehicle = vehicle
 
                     };
-                    var location = new Location()
-                    {
-                        Location_ID = Guid.NewGuid(),
-                        Latitude = driveRowObject.Latitude,
-                        Longitude = driveRowObject.Longitude,
-                        Driver_ID = driver.Driver_ID,
-                    };
-                    locations.Add(location);
-
-                    var vehicle = new Vehicle()
-                    {
-                        Vehicle_ID = Guid.NewGuid(),
-                        Brand = driveRowObject.Brand,
-                        Driver_ID = driver.Driver_ID,
-                        PricePerKM = Convert.ToDecimal(driveRowObject.PricePerKM.Replace("EUR", "")),
-                        StartPrice = Convert.ToDecimal(driveRowObject.StartPrice.Replace("EUR", ""))
-                    };
-                    vehicles.Add(vehicle);
                     drivers.Add(driver);
 
                     i++;

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RadivojeBjelic_DeltaDrive_Delta.Models;
 
@@ -11,9 +12,10 @@ using RadivojeBjelic_DeltaDrive_Delta.Models;
 namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
 {
     [DbContext(typeof(DriversDBContext))]
-    partial class DriversDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240130175604_Remodelovanje")]
+    partial class Remodelovanje
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,9 +48,6 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                     b.Property<double>("Longitude")
                         .HasColumnType("float");
 
-                    b.Property<Guid?>("PassengerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("PricePerKM")
                         .HasColumnType("decimal(18,2)");
 
@@ -57,14 +56,12 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
 
                     b.HasKey("Driver_ID");
 
-                    b.HasIndex("PassengerId");
-
                     b.ToTable("Drivers", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Driver_ID = new Guid("76b48731-3f3d-4d17-b1ad-614a395fc01f"),
+                            Driver_ID = new Guid("cf2dd2cc-5161-40be-9b4a-ca957b46b0b2"),
                             Brand = "Aston Martin Lagonda Ltd",
                             FirstName = "Pauline",
                             LastName = "Gunnar",
@@ -75,7 +72,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("de6c6379-9c3d-4169-9ef4-3c321e414eb2"),
+                            Driver_ID = new Guid("05d4fc4b-82f1-4379-a57f-d71fcc94b4ff"),
                             Brand = "LEXUS",
                             FirstName = "Raina",
                             LastName = "Lula",
@@ -86,7 +83,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("2cb89d66-085d-4ebd-b8eb-e71e10820950"),
+                            Driver_ID = new Guid("85756391-17df-4194-a24f-2b9b36e27288"),
                             Brand = "Audi",
                             FirstName = "Marc",
                             LastName = "Erin",
@@ -97,7 +94,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b8285177-7c0c-4dd9-b07b-f94dfdc15352"),
+                            Driver_ID = new Guid("1fe83549-acb6-4b69-9775-c412beaed7fb"),
                             Brand = "Subaru",
                             FirstName = "Lombardet",
                             LastName = "Casandra",
@@ -108,7 +105,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("7ea976f7-f34b-434e-90fc-c2886ae57766"),
+                            Driver_ID = new Guid("331f51d6-26a6-4496-9f7b-0c5ea14e8cb7"),
                             Brand = "Dodge",
                             FirstName = "Construccion",
                             LastName = "Petty",
@@ -119,7 +116,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e2eb940b-61ff-476d-bd41-424622932150"),
+                            Driver_ID = new Guid("08e73432-0a78-4048-aff7-06cea714f543"),
                             Brand = "MAZDA",
                             FirstName = "Rafal",
                             LastName = "Monserrat",
@@ -130,7 +127,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("656ddb69-869d-4f7b-94ca-b9361d379d3b"),
+                            Driver_ID = new Guid("6af9cdc2-f940-43ad-88ac-cc1ff5b77ed9"),
                             Brand = "Audi",
                             FirstName = "Beata",
                             LastName = "Salome",
@@ -141,7 +138,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("37ec0fe2-0be8-49cd-bb01-b8fd77aec34f"),
+                            Driver_ID = new Guid("d034cdfc-5c24-4897-aab3-0ab5e3c390f9"),
                             Brand = "Aston Martin Lagonda Ltd",
                             FirstName = "Knox",
                             LastName = "Lorrie",
@@ -152,7 +149,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a4ff609e-10e8-427d-9493-2a52c9083083"),
+                            Driver_ID = new Guid("81725eca-bf91-44ba-a666-cb28f3aca14e"),
                             Brand = "Bentley",
                             FirstName = "Brandy",
                             LastName = "Eleanor",
@@ -163,7 +160,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("646c7fc0-37d4-4f8a-9130-ad3eb836d745"),
+                            Driver_ID = new Guid("95da0622-43a9-4b72-84d7-885b5fbf88e6"),
                             Brand = "RAM",
                             FirstName = "Welch",
                             LastName = "Vaishali",
@@ -174,7 +171,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6e6e07bf-8703-4c38-bb3c-79ec48a7e0ff"),
+                            Driver_ID = new Guid("1ffe09e2-17b2-4429-9654-980caec3c1a1"),
                             Brand = "Pagani Automobili S.p.A.",
                             FirstName = "Jamison",
                             LastName = "Ash",
@@ -185,7 +182,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ad6b8a65-ebc3-488b-8663-5c014e634ace"),
+                            Driver_ID = new Guid("0f2e37a7-ced4-440e-aeca-59bb1225cad8"),
                             Brand = "Bentley",
                             FirstName = "Liliya",
                             LastName = "Yeliz",
@@ -196,7 +193,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6dc06fe4-8ff5-4a53-b9a8-f8d28d7f11c4"),
+                            Driver_ID = new Guid("2a09445a-d8e3-4f0c-b7e5-925bb792cff1"),
                             Brand = "Aston Martin Lagonda Ltd",
                             FirstName = "Leonard",
                             LastName = "Emerald",
@@ -207,7 +204,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("8915991e-1eed-473d-9a11-39f9ca4dcd43"),
+                            Driver_ID = new Guid("a34d507d-22cc-433f-ad47-d97d8bba3c88"),
                             Brand = "Mitsubishi Motors Corporation",
                             FirstName = "Bechmann",
                             LastName = "Maikol",
@@ -218,7 +215,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("41c332cf-fcf3-411a-9b24-994ebb5e1131"),
+                            Driver_ID = new Guid("7ac50c2b-3cb8-49c2-b09c-b2b219c50e41"),
                             Brand = "MASERATI",
                             FirstName = "Magali",
                             LastName = "Vibeke",
@@ -229,7 +226,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("13b0f3c4-0426-4170-91da-65eeb5815908"),
+                            Driver_ID = new Guid("3ed4518b-c31a-4aa1-ba3b-a8a495fd5d87"),
                             Brand = "Roush",
                             FirstName = "Bernardino",
                             LastName = "Danel",
@@ -240,7 +237,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("8debf956-a0fd-4486-8a1d-71dd4b6feedd"),
+                            Driver_ID = new Guid("7b7d56b4-0dd8-4995-8178-d723606918dd"),
                             Brand = "Volvo",
                             FirstName = "Zena",
                             LastName = "Kirstein",
@@ -251,7 +248,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("96d902cb-c46e-4aba-bbd5-8febb1ef3e3e"),
+                            Driver_ID = new Guid("bfc0dfc1-aaac-40f0-bba4-241886c0d970"),
                             Brand = "Jaguar",
                             FirstName = "Dilini",
                             LastName = "Joy",
@@ -262,7 +259,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d3073d26-0531-4988-9dc2-4ca1a6ff3aca"),
+                            Driver_ID = new Guid("a0c7d282-9b41-4dcc-99ec-9dde8a5ebea4"),
                             Brand = "MAZDA",
                             FirstName = "Megpg",
                             LastName = "Eunice",
@@ -273,7 +270,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("7ec644a7-b6f1-4196-a9fd-587edb031269"),
+                            Driver_ID = new Guid("ef309194-c2da-4a0f-a829-0f89674730b6"),
                             Brand = "CHEVROLET",
                             FirstName = "Construccion",
                             LastName = "Rossi",
@@ -284,7 +281,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("dac16f56-9145-497f-aba9-4ad2c137414f"),
+                            Driver_ID = new Guid("7fdde197-1eb4-4c44-9e51-cafbdd4d622d"),
                             Brand = "MASERATI",
                             FirstName = "Vartan",
                             LastName = "Rhee",
@@ -295,7 +292,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ef3a4d60-5e8d-47c0-9af1-5d4445ac1135"),
+                            Driver_ID = new Guid("7c2ded8b-df82-4ce0-9748-ace51010bead"),
                             Brand = "ALFA ROMEO",
                             FirstName = "Allison",
                             LastName = "Royden",
@@ -306,7 +303,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("894e9767-da3a-4097-93d5-a634faec4edb"),
+                            Driver_ID = new Guid("7f30358d-fdcf-4f09-bab5-1e9f8609b89b"),
                             Brand = "Mercedes-Benz",
                             FirstName = "Osvando",
                             LastName = "Nicolaios",
@@ -317,7 +314,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("afb42415-adb7-4c19-9a9f-018ab212d5ae"),
+                            Driver_ID = new Guid("7824ddab-da6e-4589-a03c-d872fabb8446"),
                             Brand = "Roush",
                             FirstName = "Rossane",
                             LastName = "Jessica",
@@ -328,7 +325,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e42f9496-a8f5-4b06-8e4f-bc918e4994ab"),
+                            Driver_ID = new Guid("c6ec06ad-5f53-4b89-b32c-df6c8a42e975"),
                             Brand = "Mini",
                             FirstName = "Rue",
                             LastName = "Henrik",
@@ -339,7 +336,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3f47f161-82d8-48d1-b7bc-d5bd8f3e83bc"),
+                            Driver_ID = new Guid("82e65307-8ecd-43f6-99ce-8d9d481bb847"),
                             Brand = "Honda",
                             FirstName = "Libbey",
                             LastName = "Ernest",
@@ -350,7 +347,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4d7af739-2d4e-4a30-add2-ec1cdf2b6148"),
+                            Driver_ID = new Guid("e70b2e1a-c1fd-479e-957e-d3bc526cc850"),
                             Brand = "Bentley",
                             FirstName = "Lupita",
                             LastName = "Bennet",
@@ -361,7 +358,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a7b4d3bf-7d9c-4d41-9aa7-cca06a6dcd21"),
+                            Driver_ID = new Guid("43615c9a-26ce-479f-bc8f-b13951a4d159"),
                             Brand = "MASERATI",
                             FirstName = "Residencia",
                             LastName = "Casper",
@@ -372,7 +369,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a3639fca-4cb6-4c15-a66b-d1e34cd5356c"),
+                            Driver_ID = new Guid("9b42c480-d45f-46f8-b1a0-54d8cb4c9302"),
                             Brand = "Dodge",
                             FirstName = "Andreas",
                             LastName = "Adolfo",
@@ -383,7 +380,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("997ab992-5066-4baa-b82d-ae292016553d"),
+                            Driver_ID = new Guid("d50299d6-c0aa-4817-a63c-bc95d35ffb50"),
                             Brand = "Subaru",
                             FirstName = "Luz",
                             LastName = "Jacqui",
@@ -394,7 +391,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a7dee342-5478-4d4f-99a9-882864ee8a82"),
+                            Driver_ID = new Guid("27fd59ac-d347-49a6-a6e5-776e05dfb800"),
                             Brand = "Chevrolet",
                             FirstName = "Jerome",
                             LastName = "Hoj",
@@ -405,7 +402,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("309ce93c-bc04-485f-abdf-231b33fb98a2"),
+                            Driver_ID = new Guid("ed4055f6-8166-4eb6-9467-392ad2239f2b"),
                             Brand = "Jeep",
                             FirstName = "Greening",
                             LastName = "Brockie",
@@ -416,7 +413,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("52feceb9-1f4c-4d33-88af-a61561e74be0"),
+                            Driver_ID = new Guid("82bef847-e914-46e9-a206-056cfc05eb72"),
                             Brand = "Chevrolet",
                             FirstName = "Krizia",
                             LastName = "Brusovanik",
@@ -427,7 +424,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("92c98223-0f08-40fb-b954-a9c4dc20694c"),
+                            Driver_ID = new Guid("dae8ec37-2023-435e-b511-2c085cce7027"),
                             Brand = "Volkswagen",
                             FirstName = "Werner",
                             LastName = "Inde",
@@ -438,7 +435,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("812ab794-821b-4737-b94c-e669acd96a39"),
+                            Driver_ID = new Guid("06c5426d-5c5a-42ba-ad94-eb6d163f0c54"),
                             Brand = "CHEVROLET",
                             FirstName = "Edouard",
                             LastName = "Jehan",
@@ -449,7 +446,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4446bb12-4de4-4cef-971b-cc06fc17b06d"),
+                            Driver_ID = new Guid("3658c7b4-07fa-4fed-8e6d-cbea815121c4"),
                             Brand = "Volvo",
                             FirstName = "Lluvia",
                             LastName = "Judd",
@@ -460,7 +457,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("87e1ebc3-9fce-495b-8430-49f08fd0c6a1"),
+                            Driver_ID = new Guid("6b48548b-6db8-4a8a-8309-f3c6c4cd03be"),
                             Brand = "Acura",
                             FirstName = "Jasmine",
                             LastName = "Dorothy",
@@ -471,7 +468,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4b6c1444-659c-4b45-876d-8f49602e1df8"),
+                            Driver_ID = new Guid("9bcf9e97-850e-4dde-ae92-e0a7b91ed97d"),
                             Brand = "Porsche",
                             FirstName = "Walker",
                             LastName = "Maruk",
@@ -482,7 +479,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e260ffa1-b102-498d-9006-d2fbb79b83a5"),
+                            Driver_ID = new Guid("9e637408-7f55-4bd3-8b38-01980a9da7ff"),
                             Brand = "TOYOTA",
                             FirstName = "Dang",
                             LastName = "Erskine",
@@ -493,7 +490,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("66766657-2612-4529-84c9-49113b974fb4"),
+                            Driver_ID = new Guid("004f8065-741c-42d8-a485-f4273b57279b"),
                             Brand = "Honda",
                             FirstName = "Marin",
                             LastName = "Jesus",
@@ -504,7 +501,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("693c9edf-414d-40d9-b77f-a5a97b95b338"),
+                            Driver_ID = new Guid("8a888e51-d289-4afc-815d-51e45c3e8ecb"),
                             Brand = "GMC",
                             FirstName = "Brehan",
                             LastName = "Leonardo",
@@ -515,7 +512,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5d903d94-7bd4-4b7d-8518-c6e00a4e8cb5"),
+                            Driver_ID = new Guid("3d835d11-bd1d-4f58-a9cb-19b628341843"),
                             Brand = "Chevrolet",
                             FirstName = "Trace",
                             LastName = "Gerry",
@@ -526,7 +523,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("dbbb4e11-e65f-456b-97be-214f8743dabb"),
+                            Driver_ID = new Guid("7de58d18-60c7-4028-8d5a-df9af1907d48"),
                             Brand = "Jeep",
                             FirstName = "Iya",
                             LastName = "Jhonatan",
@@ -537,7 +534,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("9539603c-b37e-45db-a1af-4c1f02c500dd"),
+                            Driver_ID = new Guid("fd1af75f-26c4-4a6f-8fec-fbc4c5159597"),
                             Brand = "Jaguar",
                             FirstName = "Mannix",
                             LastName = "Gisella",
@@ -548,7 +545,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d2ba7dda-80e7-48b3-8f36-37bd7bd12aec"),
+                            Driver_ID = new Guid("39f89afa-55cf-4ee1-9b7d-3f7f537c9eed"),
                             Brand = "Cadillac",
                             FirstName = "Misael",
                             LastName = "Gizelle",
@@ -559,7 +556,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4177a539-5fae-424b-bf5c-afb8087a9a3e"),
+                            Driver_ID = new Guid("494922b3-7609-4670-8437-cb6dd3f87704"),
                             Brand = "Porsche",
                             FirstName = "Chrissy",
                             LastName = "Tanyia",
@@ -570,7 +567,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("0d7c0645-56d2-4f73-af79-31733fc84783"),
+                            Driver_ID = new Guid("99192910-4ac8-4221-a84a-ee0f5893bf8c"),
                             Brand = "BMW",
                             FirstName = "Jacques",
                             LastName = "Lane",
@@ -581,7 +578,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d59a0239-8bc2-499c-99bb-a0355ae6ad65"),
+                            Driver_ID = new Guid("e14cb5eb-716f-4a44-9cc0-c7d3a4d15427"),
                             Brand = "Mini",
                             FirstName = "Jerildy",
                             LastName = "Tzipora",
@@ -592,7 +589,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ed4244ac-e606-4038-aab1-1ede08f9e60d"),
+                            Driver_ID = new Guid("b2c8e29b-d300-4bcd-92a3-0a9016d9a5fa"),
                             Brand = "Land Rover",
                             FirstName = "Oja",
                             LastName = "Chin",
@@ -603,7 +600,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a5ec5a1a-0149-4efb-93d8-b5a01945aa09"),
+                            Driver_ID = new Guid("650da44e-796e-4181-86e7-63d617c6dde2"),
                             Brand = "Chrysler",
                             FirstName = "Russell",
                             LastName = "Rune",
@@ -614,7 +611,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f67f9291-17d7-43c5-af40-c16ca74663c3"),
+                            Driver_ID = new Guid("6539d2b0-d6fa-40dc-8b24-8cc59a287592"),
                             Brand = "Volvo",
                             FirstName = "Jessa",
                             LastName = "Tetiana",
@@ -625,7 +622,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3629de8b-98f9-4100-83c3-e31cfcc5a6c0"),
+                            Driver_ID = new Guid("8602f474-7af7-4e28-bf7c-7448ea9c61c1"),
                             Brand = "Mercedes-Benz",
                             FirstName = "Fernanda",
                             LastName = "Berry",
@@ -636,7 +633,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("88ca5672-f45e-453c-bc3e-64e613ec7238"),
+                            Driver_ID = new Guid("39056de4-7733-4124-a4a1-c96782d4979f"),
                             Brand = "Jeep",
                             FirstName = "Jurg",
                             LastName = "Colleen",
@@ -647,7 +644,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("195491c7-26b6-408d-b8b4-1a23a08c6625"),
+                            Driver_ID = new Guid("753f2925-74b3-4249-98a0-40a8078ab2e3"),
                             Brand = "INFINITI",
                             FirstName = "Jastinder",
                             LastName = "Homero",
@@ -658,7 +655,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("984bcb82-c9dc-4031-b64b-6fc0dfca265c"),
+                            Driver_ID = new Guid("66f0b517-f7c8-491c-9986-330aa3b98552"),
                             Brand = "Mercedes-Benz",
                             FirstName = "Marielle",
                             LastName = "Orzai",
@@ -669,7 +666,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b13af779-1c15-4627-95f8-c71840dedb8c"),
+                            Driver_ID = new Guid("e6ef7321-5b06-49e7-b778-1d7e3c1d80e6"),
                             Brand = "Ford",
                             FirstName = "Cora",
                             LastName = "Otra",
@@ -680,7 +677,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("66671b2b-1e61-4663-8ca0-963bdf4daa2a"),
+                            Driver_ID = new Guid("30b2a683-5a45-423a-8ab0-83f36dd32454"),
                             Brand = "Lincoln",
                             FirstName = "Javid",
                             LastName = "Tranta",
@@ -691,7 +688,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("85278c00-2202-4b71-8376-8a3c3d793d34"),
+                            Driver_ID = new Guid("0f6e6cdb-f2a7-481d-a41d-9e51c682e476"),
                             Brand = "Porsche",
                             FirstName = "Jen",
                             LastName = "Shar",
@@ -702,7 +699,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c109f5a7-526c-4427-9a44-9d0e06fb582a"),
+                            Driver_ID = new Guid("4b387812-0212-4e57-b648-097e43713591"),
                             Brand = "Volvo",
                             FirstName = "Taryn",
                             LastName = "Bener",
@@ -713,7 +710,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6207ac64-008b-473c-877d-9ad9582d664f"),
+                            Driver_ID = new Guid("bdfe0504-8b03-45c0-a7f7-4c06ba8fe396"),
                             Brand = "Rolls-Royce Motor Cars Limited",
                             FirstName = "Henrik",
                             LastName = "Edwin",
@@ -724,7 +721,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("576dbb55-a5be-4dea-b95f-75faabf88386"),
+                            Driver_ID = new Guid("86ed6231-0487-4491-8ff4-876948059104"),
                             Brand = "Lamborghini",
                             FirstName = "Ilhan",
                             LastName = "Reserved",
@@ -735,7 +732,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a5fb38e9-e955-47b4-a725-56be07b97035"),
+                            Driver_ID = new Guid("51455cca-569f-43a3-aeb0-f096d2ff904f"),
                             Brand = "Lincoln",
                             FirstName = "Delair",
                             LastName = "Meredith",
@@ -746,7 +743,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("41be70b9-6c47-4671-9794-d43294ba8491"),
+                            Driver_ID = new Guid("a6bc149d-8268-4864-923e-9e753a350589"),
                             Brand = "BMW",
                             FirstName = "Alessandro",
                             LastName = "Ame",
@@ -757,7 +754,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("2cac01f6-fffd-4a59-8cde-835a8b3c5648"),
+                            Driver_ID = new Guid("65bb1ac3-aee6-435e-b55d-3d11c03739ad"),
                             Brand = "SCION",
                             FirstName = "Vanessa",
                             LastName = "Moran",
@@ -768,7 +765,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1ed1b074-858d-41ad-9766-65211a9143a1"),
+                            Driver_ID = new Guid("1e5572bb-4cde-462b-a2f5-f5c475909b5c"),
                             Brand = "Lincoln",
                             FirstName = "Geri",
                             LastName = "Miii",
@@ -779,7 +776,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1bddddbd-76cd-456f-90e9-d246e17a54ca"),
+                            Driver_ID = new Guid("6bbb0c6b-1e5d-4f64-a2a2-4b1d72d2ffe6"),
                             Brand = "NISSAN",
                             FirstName = "Rasika",
                             LastName = "Raimundo",
@@ -790,7 +787,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("91261ca7-ba96-410c-bd05-4adc0bed5050"),
+                            Driver_ID = new Guid("ea631645-a188-46b7-ad11-804eb682938b"),
                             Brand = "Lamborghini",
                             FirstName = "Letizia",
                             LastName = "Kerry",
@@ -801,7 +798,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("00e9de7e-01ad-4fe1-ae68-ca1efee0ad0e"),
+                            Driver_ID = new Guid("e3b874ec-ae18-48d5-a012-a4ca282c9193"),
                             Brand = "Bentley",
                             FirstName = "Ann",
                             LastName = "Canosa",
@@ -812,7 +809,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5068bf27-cf2f-4c37-b30a-6c4a6f882c47"),
+                            Driver_ID = new Guid("76b5f07c-7843-4eb5-92f7-2c5d0582a177"),
                             Brand = "Buick",
                             FirstName = "Edie",
                             LastName = "Maeve",
@@ -823,7 +820,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("8071a27f-0ce6-4c0c-8ab7-00c78b688343"),
+                            Driver_ID = new Guid("f79ec518-140b-4288-b28f-44e64c45d961"),
                             Brand = "Roush",
                             FirstName = "Evangeline",
                             LastName = "Granados",
@@ -834,7 +831,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("96e95cb3-71a0-4aca-8ed0-f14761048394"),
+                            Driver_ID = new Guid("d4b591e9-4887-4d2c-9bc8-7be812819dcf"),
                             Brand = "Mitsubishi Motors Corporation",
                             FirstName = "Yev",
                             LastName = "Leeann",
@@ -845,7 +842,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1815919b-ab44-444b-b895-ea5312196c4c"),
+                            Driver_ID = new Guid("1f9012c8-c693-43f7-a27e-db5df7e629af"),
                             Brand = "FIAT",
                             FirstName = "Harold",
                             LastName = "Karl",
@@ -856,7 +853,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("8079735d-03e2-4de3-b40c-9b9ab53d4a26"),
+                            Driver_ID = new Guid("2edec98c-4caa-4af2-9f81-4e0ab657a19e"),
                             Brand = "Chrysler",
                             FirstName = "Ibrahim",
                             LastName = "Alina",
@@ -867,7 +864,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("39258377-e38f-4201-87f2-18d08e455d04"),
+                            Driver_ID = new Guid("62e7fac2-0433-4218-9664-824cd048a54e"),
                             Brand = "RAM",
                             FirstName = "Renata",
                             LastName = "Yadi",
@@ -878,7 +875,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("21d350ef-dc04-4d51-b514-613c0a41a967"),
+                            Driver_ID = new Guid("11cf873e-c3b9-4ca6-ae6a-aceb4d0c375a"),
                             Brand = "TOYOTA",
                             FirstName = "Aden",
                             LastName = "Eliza",
@@ -889,7 +886,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4913826c-0b59-4a0f-8ac4-e93530c77ace"),
+                            Driver_ID = new Guid("494238bb-e11c-448c-88ef-f96e91909610"),
                             Brand = "Mini",
                             FirstName = "Maurits",
                             LastName = "Paulien",
@@ -900,7 +897,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("367e8cac-aeee-4b12-adf5-4c5eb94be68d"),
+                            Driver_ID = new Guid("89b4aa9c-f31a-4d25-93ee-303763bd75e1"),
                             Brand = "McLaren",
                             FirstName = "Flora",
                             LastName = "Allesdandro",
@@ -911,7 +908,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d666e16c-fdc7-4680-938c-3fc3401608da"),
+                            Driver_ID = new Guid("59909f93-9942-469c-a01c-0c7f1537e342"),
                             Brand = "Acura",
                             FirstName = "Anais",
                             LastName = "Johnna",
@@ -922,7 +919,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("2a5accb3-554f-4b5b-9840-8fdcf7e9641f"),
+                            Driver_ID = new Guid("9f80a974-6245-4d0e-bf09-98eec6dc932c"),
                             Brand = "Land Rover",
                             FirstName = "Maurits",
                             LastName = "Anurag",
@@ -933,7 +930,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4a87fbe6-03e2-4468-b1fa-1f66f4da2982"),
+                            Driver_ID = new Guid("02b06b4a-0970-44fa-a501-c47e99763c9d"),
                             Brand = "MAZDA",
                             FirstName = "Callaghan",
                             LastName = "Aiden",
@@ -944,7 +941,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("7ab6b4d1-7eb5-43c2-bf80-f00200eb02f0"),
+                            Driver_ID = new Guid("2c3a4a08-68c9-456b-bcdc-a2321d3ee6df"),
                             Brand = "INFINITI",
                             FirstName = "Haas",
                             LastName = "Chad",
@@ -955,7 +952,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("11060d5b-2ee7-4f61-81cd-1f7bb5f5adba"),
+                            Driver_ID = new Guid("83a09a3c-7d37-44d4-a0fe-203075edec9f"),
                             Brand = "Mini",
                             FirstName = "Dianna",
                             LastName = "Michal",
@@ -966,7 +963,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3106ae8d-68c5-4466-bec4-dbe565911d22"),
+                            Driver_ID = new Guid("617518ce-558e-45cc-bbee-75d9e08aa325"),
                             Brand = "INFINITI",
                             FirstName = "Deepti",
                             LastName = "Devara",
@@ -977,7 +974,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5f06e4ea-879e-4178-aa20-33a11e46a063"),
+                            Driver_ID = new Guid("9904ec14-3a06-41df-ba75-3272832fc3d8"),
                             Brand = "Pagani Automobili S.p.A.",
                             FirstName = "Morrissey",
                             LastName = "Kellie",
@@ -988,7 +985,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3f18daef-7697-44fb-96ca-2ff56fc13ad1"),
+                            Driver_ID = new Guid("a582e657-0c6d-469c-a2c2-a0b3dd58a66e"),
                             Brand = "Aston Martin Lagonda Ltd",
                             FirstName = "Elliot",
                             LastName = "Loiselin",
@@ -999,7 +996,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("84d6b46d-384d-4674-812f-32d246bc0232"),
+                            Driver_ID = new Guid("1f75dd9c-ae53-4a95-95af-6c3cb4521034"),
                             Brand = "Cadillac",
                             FirstName = "Olga",
                             LastName = "Kristen",
@@ -1010,7 +1007,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4967b5c2-3354-4a52-bb81-3fefe0c7a369"),
+                            Driver_ID = new Guid("b9694197-a3f1-494a-8c44-f44547a2dabb"),
                             Brand = "Roush",
                             FirstName = "Dahlia",
                             LastName = "Pandora",
@@ -1021,7 +1018,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("30e6b365-4041-48d8-af73-993f58d18b55"),
+                            Driver_ID = new Guid("fcefcc10-db2f-491f-bee5-c2eb99586f45"),
                             Brand = "Porsche",
                             FirstName = "Vlada",
                             LastName = "Marisela",
@@ -1032,7 +1029,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f7c4f713-1456-4cd4-93ac-15d43c88bd52"),
+                            Driver_ID = new Guid("2ff486c2-9f30-4e85-8092-b84b2984139c"),
                             Brand = "Ford",
                             FirstName = "Leif",
                             LastName = "Nalini",
@@ -1043,7 +1040,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f8646a71-4c8d-4258-a0fd-dbc7ce059060"),
+                            Driver_ID = new Guid("17185874-f9ac-4c5d-ae10-37dfb677c83b"),
                             Brand = "Lamborghini",
                             FirstName = "Aparna",
                             LastName = "Segundo",
@@ -1054,7 +1051,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a95f522c-0697-4fb2-b04f-e4f2d6d41fa6"),
+                            Driver_ID = new Guid("25c41ca6-9718-41ba-87f6-ad04f1683c32"),
                             Brand = "Audi",
                             FirstName = "Carling",
                             LastName = "Angeles",
@@ -1065,7 +1062,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4d45cd7b-6926-4072-a1b8-9511a9a0b1ff"),
+                            Driver_ID = new Guid("5a82e0bc-098d-44fa-b391-4ea63393fc10"),
                             Brand = "INFINITI",
                             FirstName = "Bici",
                             LastName = "Travis",
@@ -1076,7 +1073,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("9ad3462d-3972-480c-b1f8-51b3bb95beaa"),
+                            Driver_ID = new Guid("7e576aed-b897-444a-969e-b1da9d3ad95e"),
                             Brand = "Aston Martin Lagonda Ltd",
                             FirstName = "Oracio",
                             LastName = "Richie",
@@ -1087,7 +1084,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f5ea7d8d-21e3-40bf-a301-97f52c946799"),
+                            Driver_ID = new Guid("5a7fe07e-df81-401a-9e19-715715b5e7c0"),
                             Brand = "Porsche",
                             FirstName = "Lily",
                             LastName = "Eugenia",
@@ -1098,7 +1095,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("00f36e47-547d-485f-9db1-17b014167e92"),
+                            Driver_ID = new Guid("a84c0553-3ee3-4c31-9203-cc5d1c243799"),
                             Brand = "Lincoln",
                             FirstName = "Gert",
                             LastName = "Andres",
@@ -1109,7 +1106,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("9e78b0f1-c53c-4223-be9a-466603b09158"),
+                            Driver_ID = new Guid("4194f64a-7219-4e79-b1b2-4833170f4761"),
                             Brand = "Honda",
                             FirstName = "Talbot",
                             LastName = "Carwen",
@@ -1120,7 +1117,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("22d8150c-8b54-4973-b1d3-774371dfa8f9"),
+                            Driver_ID = new Guid("94a1a6b4-40f2-4118-9dd9-c93eb954517d"),
                             Brand = "Volvo",
                             FirstName = "Emma",
                             LastName = "Tasha",
@@ -1131,7 +1128,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("fae6a646-6782-4856-8674-5efa7825806c"),
+                            Driver_ID = new Guid("76c5443c-3061-4bb5-afb2-ccf85b848931"),
                             Brand = "TOYOTA",
                             FirstName = "Henry",
                             LastName = "Violoncella",
@@ -1142,7 +1139,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f13fca95-a11b-403d-839e-dfafcb3366cb"),
+                            Driver_ID = new Guid("9ec52e95-d76e-4015-91b7-130c84988c06"),
                             Brand = "Roush",
                             FirstName = "Iva",
                             LastName = "Sloane",
@@ -1153,7 +1150,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("09ead8ea-9b20-4a33-b39a-c500710bb1ad"),
+                            Driver_ID = new Guid("ae3be646-4553-483f-bfc7-e8a9cd5b8d3f"),
                             Brand = "Mini",
                             FirstName = "Larae",
                             LastName = "Lindsey",
@@ -1164,7 +1161,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("891101dd-8baf-43b7-aa45-3949992e9498"),
+                            Driver_ID = new Guid("b1069697-6230-42f4-85ad-cfe72e4d8189"),
                             Brand = "Aston Martin Lagonda Ltd",
                             FirstName = "Pauline",
                             LastName = "Gunnar",
@@ -1175,7 +1172,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("18d2bd5b-0d61-4f2f-a64f-2049016da2c0"),
+                            Driver_ID = new Guid("70e6035a-4dee-480a-9638-7126a83809a5"),
                             Brand = "LEXUS",
                             FirstName = "Raina",
                             LastName = "Lula",
@@ -1186,7 +1183,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3a1d3b8e-8acb-457b-bfe8-7ce6af5684e2"),
+                            Driver_ID = new Guid("fdd4900f-851b-46cc-99a6-cb31f4152161"),
                             Brand = "Audi",
                             FirstName = "Marc",
                             LastName = "Erin",
@@ -1197,7 +1194,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("31b5c3f8-353e-4b66-945c-284ea6ccff06"),
+                            Driver_ID = new Guid("69192feb-4384-4d56-be24-288ac1ce2e82"),
                             Brand = "Subaru",
                             FirstName = "Lombardet",
                             LastName = "Casandra",
@@ -1208,7 +1205,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("71469497-07cc-4a5a-a1e1-9f3c113cbda3"),
+                            Driver_ID = new Guid("bcb2c0ed-0d10-4463-97ef-75fcfc52f973"),
                             Brand = "Dodge",
                             FirstName = "Construccion",
                             LastName = "Petty",
@@ -1219,7 +1216,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("fc6109f3-3d4b-407d-a307-6d7e09fe59a7"),
+                            Driver_ID = new Guid("e9eee959-3410-4886-8867-1274d66ba489"),
                             Brand = "MAZDA",
                             FirstName = "Rafal",
                             LastName = "Monserrat",
@@ -1230,7 +1227,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("267a100b-7f65-453b-8ce2-4420d97aa193"),
+                            Driver_ID = new Guid("f7de4e7c-1c80-4b92-aa42-c16094ab5338"),
                             Brand = "Audi",
                             FirstName = "Beata",
                             LastName = "Salome",
@@ -1241,7 +1238,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("8c3da618-170c-477c-ba9e-b6cb68bea74b"),
+                            Driver_ID = new Guid("049beddc-c35c-45eb-97c4-7c8db57faee9"),
                             Brand = "Aston Martin Lagonda Ltd",
                             FirstName = "Knox",
                             LastName = "Lorrie",
@@ -1252,7 +1249,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4e73e2d7-d499-438a-8ed4-5a6547909569"),
+                            Driver_ID = new Guid("f9495d9f-5e65-44dc-bac3-eaddc4203a60"),
                             Brand = "Bentley",
                             FirstName = "Brandy",
                             LastName = "Eleanor",
@@ -1263,7 +1260,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e291af4d-57ad-45db-b14c-1e03bc1867ad"),
+                            Driver_ID = new Guid("88c42ff0-4574-44b1-ab37-549003dc713d"),
                             Brand = "RAM",
                             FirstName = "Welch",
                             LastName = "Vaishali",
@@ -1274,7 +1271,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("491ff64d-816d-4224-b721-ec20ccc554b9"),
+                            Driver_ID = new Guid("8c189fa0-4c92-4adb-87bd-1db9a9122160"),
                             Brand = "Pagani Automobili S.p.A.",
                             FirstName = "Jamison",
                             LastName = "Ash",
@@ -1285,7 +1282,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5ce941c9-9738-40ab-8ee7-b511ea58d6cb"),
+                            Driver_ID = new Guid("f10d9963-db15-4bf2-8992-671eb138416e"),
                             Brand = "Bentley",
                             FirstName = "Liliya",
                             LastName = "Yeliz",
@@ -1296,7 +1293,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("52881991-d721-4904-8cbc-1a57cefdbc11"),
+                            Driver_ID = new Guid("a6e2999c-9738-4788-9338-7062817a8027"),
                             Brand = "Aston Martin Lagonda Ltd",
                             FirstName = "Leonard",
                             LastName = "Emerald",
@@ -1307,7 +1304,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a13bf185-73dd-466d-998c-ba93294ed128"),
+                            Driver_ID = new Guid("6397731d-cdb3-4e9b-ba85-7331ef651772"),
                             Brand = "Mitsubishi Motors Corporation",
                             FirstName = "Bechmann",
                             LastName = "Maikol",
@@ -1318,7 +1315,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("22a2adf5-0177-4619-992a-15ec3248f76d"),
+                            Driver_ID = new Guid("795010f8-0342-4eb1-989f-105a941a5a40"),
                             Brand = "MASERATI",
                             FirstName = "Magali",
                             LastName = "Vibeke",
@@ -1329,7 +1326,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b0bb0e4b-ae7a-4419-a031-1d43715a99d7"),
+                            Driver_ID = new Guid("38db4659-0861-4450-9774-d44a26ddcaa3"),
                             Brand = "Roush",
                             FirstName = "Bernardino",
                             LastName = "Danel",
@@ -1340,7 +1337,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3455cfd7-3fb5-48af-ad16-65746bfade41"),
+                            Driver_ID = new Guid("07447853-826c-4106-a0be-26265b9bc28d"),
                             Brand = "Volvo",
                             FirstName = "Zena",
                             LastName = "Kirstein",
@@ -1351,7 +1348,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4e593572-1663-49d9-a58d-e0fdd0ffc950"),
+                            Driver_ID = new Guid("232f9be4-85e6-4760-8ad7-57eeb939e69d"),
                             Brand = "Jaguar",
                             FirstName = "Dilini",
                             LastName = "Joy",
@@ -1362,7 +1359,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6b2ecc34-a97b-400b-ac4f-22775e733779"),
+                            Driver_ID = new Guid("5edd37f6-e50f-49c1-8b0b-88272e6d6800"),
                             Brand = "MAZDA",
                             FirstName = "Megpg",
                             LastName = "Eunice",
@@ -1373,7 +1370,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("153c3042-d33e-4a19-b19a-37c4bf5f429f"),
+                            Driver_ID = new Guid("2248aa70-296b-4fef-ae1a-6a3c2faac544"),
                             Brand = "CHEVROLET",
                             FirstName = "Construccion",
                             LastName = "Rossi",
@@ -1384,7 +1381,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6ea8ae57-b863-4587-a0ca-8e458ff15282"),
+                            Driver_ID = new Guid("44f7d60c-3de8-4a86-ae66-252fa0e800a5"),
                             Brand = "MASERATI",
                             FirstName = "Vartan",
                             LastName = "Rhee",
@@ -1395,7 +1392,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("47dc1779-00cd-46ed-9ac9-89098a1598e2"),
+                            Driver_ID = new Guid("cd0c6d63-3019-4723-a676-7cc9613a8930"),
                             Brand = "ALFA ROMEO",
                             FirstName = "Allison",
                             LastName = "Royden",
@@ -1406,7 +1403,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("cc27ae7a-86c7-4137-b310-4a854897f195"),
+                            Driver_ID = new Guid("25beea4f-0993-4160-a8ee-d7e32898a6d1"),
                             Brand = "Mercedes-Benz",
                             FirstName = "Osvando",
                             LastName = "Nicolaios",
@@ -1417,7 +1414,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ce0f9e4d-9b46-4191-8636-005be66daf2a"),
+                            Driver_ID = new Guid("65543524-2ba8-47c0-b78b-f5ae90a67519"),
                             Brand = "Roush",
                             FirstName = "Rossane",
                             LastName = "Jessica",
@@ -1428,7 +1425,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3afed86b-5ad0-4702-ace5-cb2e6ee951fb"),
+                            Driver_ID = new Guid("17af9d25-b076-479c-8067-a7eb35beb4b1"),
                             Brand = "Mini",
                             FirstName = "Rue",
                             LastName = "Henrik",
@@ -1439,7 +1436,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1a879c4c-96b4-4357-9b71-aa87805a8a18"),
+                            Driver_ID = new Guid("8388b74e-1fe6-4afe-a720-3eb434faf04f"),
                             Brand = "Honda",
                             FirstName = "Libbey",
                             LastName = "Ernest",
@@ -1450,7 +1447,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("01620c9e-6033-431c-93c1-6eb16fd9c00c"),
+                            Driver_ID = new Guid("49749ce2-f409-4189-952c-3f3b83d0f077"),
                             Brand = "Bentley",
                             FirstName = "Lupita",
                             LastName = "Bennet",
@@ -1461,7 +1458,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("35a58572-2450-43b0-b466-b3e8c5f3ae1f"),
+                            Driver_ID = new Guid("1f95bcb6-4a61-4aad-848f-206ddab5f6ef"),
                             Brand = "MASERATI",
                             FirstName = "Residencia",
                             LastName = "Casper",
@@ -1472,7 +1469,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("91ac2a70-5aca-496d-ba72-46ba55708b3b"),
+                            Driver_ID = new Guid("f0fd270e-b7f5-4abf-8ba0-2bcabd5cea67"),
                             Brand = "Dodge",
                             FirstName = "Andreas",
                             LastName = "Adolfo",
@@ -1483,7 +1480,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1830f0a3-2b15-4201-bfa8-fb55f3366587"),
+                            Driver_ID = new Guid("edcf7be0-2012-40b3-8c0f-b454bac1c4d8"),
                             Brand = "Subaru",
                             FirstName = "Luz",
                             LastName = "Jacqui",
@@ -1494,7 +1491,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("2cb73476-c832-4aca-b2b9-1f67f210a9c4"),
+                            Driver_ID = new Guid("0e5e2c58-456c-4ece-9ddb-bebefead92d1"),
                             Brand = "Chevrolet",
                             FirstName = "Jerome",
                             LastName = "Hoj",
@@ -1505,7 +1502,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e32ec928-dc39-4a0f-a4d9-30f0902a1fcf"),
+                            Driver_ID = new Guid("7e28c8db-7f33-4c48-9206-38b2e6e1d73d"),
                             Brand = "Jeep",
                             FirstName = "Greening",
                             LastName = "Brockie",
@@ -1516,7 +1513,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("0fed1142-3102-48af-921d-609e970436ac"),
+                            Driver_ID = new Guid("29a951aa-9c60-47e6-b702-da80a93558a1"),
                             Brand = "Chevrolet",
                             FirstName = "Krizia",
                             LastName = "Brusovanik",
@@ -1527,7 +1524,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6065e47e-d656-403e-993a-9ff22cde2d75"),
+                            Driver_ID = new Guid("af0bfd5b-e879-47f0-959d-9989b653beb9"),
                             Brand = "Volkswagen",
                             FirstName = "Werner",
                             LastName = "Inde",
@@ -1538,7 +1535,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("eb47f9a7-b5aa-4ada-a53f-4f92d00ebb05"),
+                            Driver_ID = new Guid("1194288c-31fb-477d-b391-14e72a689524"),
                             Brand = "CHEVROLET",
                             FirstName = "Edouard",
                             LastName = "Jehan",
@@ -1549,7 +1546,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d5d13f31-c0ca-47e2-af55-d1ee2a6807f8"),
+                            Driver_ID = new Guid("1e6f4371-9a29-46c5-b7fa-5942346673e9"),
                             Brand = "Volvo",
                             FirstName = "Lluvia",
                             LastName = "Judd",
@@ -1560,7 +1557,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a30fe068-f862-41b5-bc4d-7a586c45897e"),
+                            Driver_ID = new Guid("1783f8ec-65b1-49ad-8d32-b32e8ca55836"),
                             Brand = "Acura",
                             FirstName = "Jasmine",
                             LastName = "Dorothy",
@@ -1571,7 +1568,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("2c3ee8fc-84c9-40f8-b7f9-aa2ac826b9ec"),
+                            Driver_ID = new Guid("a02883ab-afe2-4546-99f5-9700ca57055c"),
                             Brand = "Porsche",
                             FirstName = "Walker",
                             LastName = "Maruk",
@@ -1582,7 +1579,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("937ddec7-17d3-420b-a27a-6c0fe6c2b1b9"),
+                            Driver_ID = new Guid("bd3ed94c-bfe0-4556-b71c-7cbe9415206f"),
                             Brand = "TOYOTA",
                             FirstName = "Dang",
                             LastName = "Erskine",
@@ -1593,7 +1590,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("03e12f6f-5a7e-4be8-8ffe-84a721ed50f1"),
+                            Driver_ID = new Guid("b1119d0f-9962-4e21-a364-9ee962dbbe58"),
                             Brand = "Honda",
                             FirstName = "Marin",
                             LastName = "Jesus",
@@ -1604,7 +1601,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("074f30cd-b949-452f-b5f4-fc9af2d61113"),
+                            Driver_ID = new Guid("564ea24b-e16c-4333-a23d-95b62425db09"),
                             Brand = "GMC",
                             FirstName = "Brehan",
                             LastName = "Leonardo",
@@ -1615,7 +1612,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("cb6b8445-c635-4297-9fa6-45b8ab99a28d"),
+                            Driver_ID = new Guid("815cf79b-f5cf-4c6d-850b-d38275208a05"),
                             Brand = "Chevrolet",
                             FirstName = "Trace",
                             LastName = "Gerry",
@@ -1626,7 +1623,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c395b0e6-0935-4e6a-bf36-e92d9089bd01"),
+                            Driver_ID = new Guid("af2e6713-71d7-4759-abe6-4ab800792431"),
                             Brand = "Jeep",
                             FirstName = "Iya",
                             LastName = "Jhonatan",
@@ -1637,7 +1634,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("8977c442-d997-43f4-a810-c0b5de78ffda"),
+                            Driver_ID = new Guid("2ea4c2d1-ba88-49c7-b891-d6101e41ec6d"),
                             Brand = "Jaguar",
                             FirstName = "Mannix",
                             LastName = "Gisella",
@@ -1648,7 +1645,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f7b8d1c4-72cc-4bde-bee8-32e4f3ec7492"),
+                            Driver_ID = new Guid("356bbd30-4d05-4aa5-a498-e625b3f528c2"),
                             Brand = "Cadillac",
                             FirstName = "Misael",
                             LastName = "Gizelle",
@@ -1659,7 +1656,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("141c0a05-3806-4631-921e-3b987f397aae"),
+                            Driver_ID = new Guid("f94ae6c6-a8be-4c35-afc5-2d9b390b1aac"),
                             Brand = "Porsche",
                             FirstName = "Chrissy",
                             LastName = "Tanyia",
@@ -1670,7 +1667,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("98f3ee4b-c0c3-47ca-a7e6-fc27c93eb1d8"),
+                            Driver_ID = new Guid("eb6dd92c-0e2d-4ad2-9c10-137331cd712d"),
                             Brand = "BMW",
                             FirstName = "Jacques",
                             LastName = "Lane",
@@ -1681,7 +1678,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d0490c0c-ecf7-4aa1-a58a-245012e0cebb"),
+                            Driver_ID = new Guid("585f6190-1600-4991-976d-9cd490026e19"),
                             Brand = "Mini",
                             FirstName = "Jerildy",
                             LastName = "Tzipora",
@@ -1692,7 +1689,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a11df2e0-b647-4bc9-86c1-f761f5b92b88"),
+                            Driver_ID = new Guid("af8a4c35-1078-45ce-a800-86dc42960ca7"),
                             Brand = "Land Rover",
                             FirstName = "Oja",
                             LastName = "Chin",
@@ -1703,7 +1700,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("fae6871b-c2c7-460f-84a7-82ff53d8e3b7"),
+                            Driver_ID = new Guid("ab71bdea-34ec-4c60-88f0-91453fec7055"),
                             Brand = "Chrysler",
                             FirstName = "Russell",
                             LastName = "Rune",
@@ -1714,7 +1711,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("35286419-204b-460b-be3f-084d5a38451d"),
+                            Driver_ID = new Guid("c710b4d5-0cb0-4d54-bfaa-5301faac4846"),
                             Brand = "Volvo",
                             FirstName = "Jessa",
                             LastName = "Tetiana",
@@ -1725,7 +1722,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("648dc39c-e41c-48aa-ba1a-53bd29d00bf0"),
+                            Driver_ID = new Guid("dc70d3f2-a97d-4018-a70e-0f3e6d398a5f"),
                             Brand = "Mercedes-Benz",
                             FirstName = "Fernanda",
                             LastName = "Berry",
@@ -1736,7 +1733,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("dfc8ba79-3ddd-4113-b4bd-a7d0731c7ed1"),
+                            Driver_ID = new Guid("6f83c842-8391-4b95-bf3d-abbd60edfcd8"),
                             Brand = "Jeep",
                             FirstName = "Jurg",
                             LastName = "Colleen",
@@ -1747,7 +1744,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("96b6eedb-d231-42ec-92d1-e5e9af33ba80"),
+                            Driver_ID = new Guid("584dcfaf-bd1d-41af-810c-ced36f351e93"),
                             Brand = "INFINITI",
                             FirstName = "Jastinder",
                             LastName = "Homero",
@@ -1758,7 +1755,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("dc734401-ca8e-40e9-906c-46e08e3a641c"),
+                            Driver_ID = new Guid("25c4950a-f6ad-479b-b42a-d32327389a07"),
                             Brand = "Mercedes-Benz",
                             FirstName = "Marielle",
                             LastName = "Orzai",
@@ -1769,7 +1766,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("0309b046-4098-475e-93aa-3f6825730291"),
+                            Driver_ID = new Guid("f60df109-eb79-4805-a87e-3b1e41d6ddba"),
                             Brand = "Ford",
                             FirstName = "Cora",
                             LastName = "Otra",
@@ -1780,7 +1777,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("0e3dab34-bfad-4baf-b00d-61908a7f4eba"),
+                            Driver_ID = new Guid("506d7857-c454-4f42-bc68-695bc4bd2029"),
                             Brand = "Lincoln",
                             FirstName = "Javid",
                             LastName = "Tranta",
@@ -1791,7 +1788,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("59f960e2-8446-404c-9eba-c31ab33a6e15"),
+                            Driver_ID = new Guid("996c7174-0e4a-449f-95c9-4fa7c09d9a05"),
                             Brand = "Porsche",
                             FirstName = "Jen",
                             LastName = "Shar",
@@ -1802,7 +1799,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e6037c58-f922-446c-8688-124f45546878"),
+                            Driver_ID = new Guid("b56e7fd3-a052-4b0f-bd12-abc8bfc957f6"),
                             Brand = "Volvo",
                             FirstName = "Taryn",
                             LastName = "Bener",
@@ -1813,7 +1810,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("0acf1bc0-983d-47c1-99b6-61546f9f8bbe"),
+                            Driver_ID = new Guid("68bb7bc8-be0d-4eac-8188-0de22e93dd76"),
                             Brand = "Rolls-Royce Motor Cars Limited",
                             FirstName = "Henrik",
                             LastName = "Edwin",
@@ -1824,7 +1821,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5b12e337-d815-4cf2-9fdb-5f45a8d0ea96"),
+                            Driver_ID = new Guid("e9ec0873-45ee-482d-abb0-87dca2354ff4"),
                             Brand = "Lamborghini",
                             FirstName = "Ilhan",
                             LastName = "Reserved",
@@ -1835,7 +1832,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c2a19d0a-6148-4998-b151-5a7a2ca6370b"),
+                            Driver_ID = new Guid("c2eeb620-da07-4361-b9b8-cf006e54110c"),
                             Brand = "Lincoln",
                             FirstName = "Delair",
                             LastName = "Meredith",
@@ -1846,7 +1843,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("45fb1944-0c72-4da9-8779-d05e73b133b2"),
+                            Driver_ID = new Guid("160e8582-8601-4fe3-b4ca-1a0a93cf1c12"),
                             Brand = "BMW",
                             FirstName = "Alessandro",
                             LastName = "Ame",
@@ -1857,7 +1854,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("03b51e50-4289-4b2f-9d13-053401ce0960"),
+                            Driver_ID = new Guid("57f51d25-b3fe-4fe3-937f-7a9470e979c8"),
                             Brand = "SCION",
                             FirstName = "Vanessa",
                             LastName = "Moran",
@@ -1868,7 +1865,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("29c474ae-70e4-42cb-83bb-9d36345cfc7f"),
+                            Driver_ID = new Guid("dcd474d4-db13-4c8b-ba97-1e338fdb8ba1"),
                             Brand = "Lincoln",
                             FirstName = "Geri",
                             LastName = "Miii",
@@ -1879,7 +1876,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5d030eac-6267-4016-9983-1c3437bfa99b"),
+                            Driver_ID = new Guid("f0f47380-a3ed-4dd4-8941-f3b67fcc0204"),
                             Brand = "NISSAN",
                             FirstName = "Rasika",
                             LastName = "Raimundo",
@@ -1890,7 +1887,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e5ca6948-cc08-456b-9eb4-b5222871af52"),
+                            Driver_ID = new Guid("1062708d-0f1e-4306-886b-c4d614580702"),
                             Brand = "Lamborghini",
                             FirstName = "Letizia",
                             LastName = "Kerry",
@@ -1901,7 +1898,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("fea13385-9b96-4558-a640-579902b05124"),
+                            Driver_ID = new Guid("794c882e-1db7-4bea-b6f2-ce37ee43993b"),
                             Brand = "Bentley",
                             FirstName = "Ann",
                             LastName = "Canosa",
@@ -1912,7 +1909,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("048566d9-ec66-47ac-93fd-0919ce488b22"),
+                            Driver_ID = new Guid("97fc57b1-f1de-4b96-ba5c-38aa6fd42e06"),
                             Brand = "Buick",
                             FirstName = "Edie",
                             LastName = "Maeve",
@@ -1923,7 +1920,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b70c7b8e-d09f-4fcf-b520-f40fad1d4623"),
+                            Driver_ID = new Guid("00ed8c46-ffa3-4c22-a409-1f305083babd"),
                             Brand = "Roush",
                             FirstName = "Evangeline",
                             LastName = "Granados",
@@ -1934,7 +1931,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d941c82e-d1fa-459c-9f91-5558388e86d0"),
+                            Driver_ID = new Guid("1ee63e78-b3f5-4bcd-9ae5-b3a2a327ebd8"),
                             Brand = "Mitsubishi Motors Corporation",
                             FirstName = "Yev",
                             LastName = "Leeann",
@@ -1945,7 +1942,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c28a1bf4-6a8b-4936-b203-a4e51771ea1d"),
+                            Driver_ID = new Guid("a449ce22-ca17-4d81-9a55-be975d35bc69"),
                             Brand = "FIAT",
                             FirstName = "Harold",
                             LastName = "Karl",
@@ -1956,7 +1953,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("01650031-749f-4d48-ba9f-71487925857a"),
+                            Driver_ID = new Guid("27018c47-1d13-4f78-9d77-8bc26d32fadd"),
                             Brand = "Chrysler",
                             FirstName = "Ibrahim",
                             LastName = "Alina",
@@ -1967,7 +1964,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d109c598-2357-4009-b2f6-c4e3ef56d6c0"),
+                            Driver_ID = new Guid("d830ab2c-ef79-4fbe-b1ea-9b05130b6073"),
                             Brand = "RAM",
                             FirstName = "Renata",
                             LastName = "Yadi",
@@ -1978,7 +1975,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f71c42f8-e9ba-402b-b962-0598027dc89d"),
+                            Driver_ID = new Guid("823d041e-0c2e-473a-b620-1c9491a83229"),
                             Brand = "TOYOTA",
                             FirstName = "Aden",
                             LastName = "Eliza",
@@ -1989,7 +1986,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a329b795-dada-40e9-a7e2-e1c6c8c9a11c"),
+                            Driver_ID = new Guid("f30c26dc-9b06-4aaf-ac96-cc6e80312b7d"),
                             Brand = "Mini",
                             FirstName = "Maurits",
                             LastName = "Paulien",
@@ -2000,7 +1997,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d98aadef-0d80-4fb6-856a-2be6ca3afe5f"),
+                            Driver_ID = new Guid("06f5b20c-bdc1-486b-9ad7-c49ba597ea12"),
                             Brand = "McLaren",
                             FirstName = "Flora",
                             LastName = "Allesdandro",
@@ -2011,7 +2008,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e33f8a9f-771a-4d47-9efd-ad4a5e190ef1"),
+                            Driver_ID = new Guid("96f0e248-5548-43c3-9e66-c83e44e740ad"),
                             Brand = "Acura",
                             FirstName = "Anais",
                             LastName = "Johnna",
@@ -2022,7 +2019,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4045b6a8-fc43-4fe9-b1f5-a5949c16164f"),
+                            Driver_ID = new Guid("843ce6a8-cbe6-4514-b9ca-1de609ca2d2b"),
                             Brand = "Land Rover",
                             FirstName = "Maurits",
                             LastName = "Anurag",
@@ -2033,7 +2030,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a3d9b81d-b768-4637-8c6b-f3665158ede4"),
+                            Driver_ID = new Guid("129a25cc-b3e8-403b-9fdd-ee8ae521583b"),
                             Brand = "MAZDA",
                             FirstName = "Callaghan",
                             LastName = "Aiden",
@@ -2044,7 +2041,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b2618d19-f2cf-4542-9645-46a7e2c38c5c"),
+                            Driver_ID = new Guid("46867f9b-6fd2-4fec-9400-41aedee06cff"),
                             Brand = "INFINITI",
                             FirstName = "Haas",
                             LastName = "Chad",
@@ -2055,7 +2052,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f697baf1-aa85-4a02-85ab-db8d84732c00"),
+                            Driver_ID = new Guid("275747aa-e0e0-4ef5-9876-0f69d3830422"),
                             Brand = "Mini",
                             FirstName = "Dianna",
                             LastName = "Michal",
@@ -2066,7 +2063,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("166eb87f-a37e-4713-aa7e-999907a07933"),
+                            Driver_ID = new Guid("1ed9a879-5c07-4acf-8556-0fec3d4fc5e8"),
                             Brand = "INFINITI",
                             FirstName = "Deepti",
                             LastName = "Devara",
@@ -2077,7 +2074,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("43a2ea07-b03f-4d70-a859-398f54cd8b30"),
+                            Driver_ID = new Guid("0bbd6798-1646-4315-844b-15555b3de3d7"),
                             Brand = "Pagani Automobili S.p.A.",
                             FirstName = "Morrissey",
                             LastName = "Kellie",
@@ -2088,7 +2085,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("58d2578c-0734-41d9-92e2-c19375597e0a"),
+                            Driver_ID = new Guid("456a7d1b-7746-459a-a1ae-ffea5698a11d"),
                             Brand = "Aston Martin Lagonda Ltd",
                             FirstName = "Elliot",
                             LastName = "Loiselin",
@@ -2099,7 +2096,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a54c59e9-9b29-4bc0-a20b-3cd9c4a40861"),
+                            Driver_ID = new Guid("b4c4c3d6-dd3d-4cb2-a74d-884efa1972e3"),
                             Brand = "Cadillac",
                             FirstName = "Olga",
                             LastName = "Kristen",
@@ -2110,7 +2107,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("35384791-5da2-4c5d-b336-a31de15aca19"),
+                            Driver_ID = new Guid("1c7c79f8-0d24-4433-b67e-11f1d48d959c"),
                             Brand = "Roush",
                             FirstName = "Dahlia",
                             LastName = "Pandora",
@@ -2121,7 +2118,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3b23797d-d899-42c1-aeff-0393ec9c8cfc"),
+                            Driver_ID = new Guid("40d545f8-7efa-402a-9380-174d4c1a166d"),
                             Brand = "Porsche",
                             FirstName = "Vlada",
                             LastName = "Marisela",
@@ -2132,7 +2129,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("bf6e933d-4fb0-4c36-9595-ad374b4416e7"),
+                            Driver_ID = new Guid("18737044-2853-4641-995d-e7c3dc8199b6"),
                             Brand = "Ford",
                             FirstName = "Leif",
                             LastName = "Nalini",
@@ -2143,7 +2140,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("58fbbb89-cf48-4982-bec4-111cbb7bb110"),
+                            Driver_ID = new Guid("f43f18ed-b2fe-4ddd-91c2-ab0979f7e94b"),
                             Brand = "Lamborghini",
                             FirstName = "Aparna",
                             LastName = "Segundo",
@@ -2154,7 +2151,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("bf1eb7e5-2b2a-4e3f-9e85-15bb646b2f51"),
+                            Driver_ID = new Guid("14c8a248-1387-4c3c-87fc-a7141c2e5b94"),
                             Brand = "Audi",
                             FirstName = "Carling",
                             LastName = "Angeles",
@@ -2165,7 +2162,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6539c264-c862-4d4b-9c29-f337943066a4"),
+                            Driver_ID = new Guid("909fd388-272e-41c6-a9bf-7d9fced34691"),
                             Brand = "INFINITI",
                             FirstName = "Bici",
                             LastName = "Travis",
@@ -2176,7 +2173,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("583e4baa-3ae8-48cc-84c4-6dd3df43eaf2"),
+                            Driver_ID = new Guid("2f39e627-71d0-4476-88ae-cef5dcdbdb4c"),
                             Brand = "Aston Martin Lagonda Ltd",
                             FirstName = "Oracio",
                             LastName = "Richie",
@@ -2187,7 +2184,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b040e4ce-3e7d-40e7-9286-d97021032966"),
+                            Driver_ID = new Guid("8aaf6785-8199-4bea-a62b-fba974da05ab"),
                             Brand = "Porsche",
                             FirstName = "Lily",
                             LastName = "Eugenia",
@@ -2198,7 +2195,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c0d03660-f8de-41e6-89f6-52877715e74e"),
+                            Driver_ID = new Guid("39c24b9e-1ddb-49c7-bd19-8057639d1a11"),
                             Brand = "Lincoln",
                             FirstName = "Gert",
                             LastName = "Andres",
@@ -2209,7 +2206,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("0228aa27-9626-4b9c-81e5-b2b9f38d5dd4"),
+                            Driver_ID = new Guid("2c798ef9-021d-4356-85c3-5e064738b6a6"),
                             Brand = "Honda",
                             FirstName = "Talbot",
                             LastName = "Carwen",
@@ -2220,7 +2217,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f9a9814a-7eba-4569-8f29-ea3a28739e2a"),
+                            Driver_ID = new Guid("0bdb282d-8dc3-4f04-ba4d-91594732c427"),
                             Brand = "Volvo",
                             FirstName = "Emma",
                             LastName = "Tasha",
@@ -2231,7 +2228,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ba3126a8-42f0-4521-8c50-31f91ac0a9c4"),
+                            Driver_ID = new Guid("7a110831-cb63-4fb9-b1d7-361ff7135db3"),
                             Brand = "TOYOTA",
                             FirstName = "Henry",
                             LastName = "Violoncella",
@@ -2242,7 +2239,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ce40fc29-cf54-4c95-9798-ca5fd877e17b"),
+                            Driver_ID = new Guid("645b43f5-7df5-40b1-bf13-48e5ef5481d5"),
                             Brand = "Roush",
                             FirstName = "Iva",
                             LastName = "Sloane",
@@ -2253,7 +2250,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("de432a44-b0e7-445c-80bd-872193c4be61"),
+                            Driver_ID = new Guid("1dbf0f27-0f20-47b7-b767-07dc6c238682"),
                             Brand = "Mini",
                             FirstName = "Larae",
                             LastName = "Lindsey",
@@ -2276,9 +2273,12 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                     b.Property<Guid>("Driver_ID")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("Driver_ID1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PassengerLastname")
                         .IsRequired()
@@ -2296,15 +2296,14 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
 
                     b.HasKey("PassengerId");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
+                    b.HasIndex("Driver_ID1");
 
                     b.ToTable("Passengers");
 
                     b.HasData(
                         new
                         {
-                            PassengerId = new Guid("b069aeae-a2cd-4e8c-a541-27cf3c9643a2"),
+                            PassengerId = new Guid("211614f6-afb0-44c2-a381-f9031ba507b0"),
                             Birthday = new DateTime(1993, 6, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "raca93@gmail.com",
@@ -2315,7 +2314,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            PassengerId = new Guid("7a50e23c-b736-47c1-b09b-b7c36f4fe84e"),
+                            PassengerId = new Guid("e37657bc-84c5-4e24-b0b1-cfe8084c4e21"),
                             Birthday = new DateTime(1987, 11, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "ana@example.com",
@@ -2326,7 +2325,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            PassengerId = new Guid("d01fdb60-c21a-4516-a043-319f5bb7ee6e"),
+                            PassengerId = new Guid("e7b2a0ea-3f8d-4972-b206-2a50be00e20e"),
                             Birthday = new DateTime(1990, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "marko@example.com",
@@ -2337,7 +2336,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            PassengerId = new Guid("7bec83e1-f904-4bf5-a739-907e3ecd22e8"),
+                            PassengerId = new Guid("3e6212c8-8521-4a34-b761-cb57f546f8a0"),
                             Birthday = new DateTime(1992, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "jelena@example.com",
@@ -2348,7 +2347,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            PassengerId = new Guid("2f79f77d-8681-4b34-8d5e-4f62c25c7f85"),
+                            PassengerId = new Guid("3313ee16-7511-4517-bf92-d40dcb54fc79"),
                             Birthday = new DateTime(1985, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "nikola@example.com",
@@ -2359,7 +2358,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         },
                         new
                         {
-                            PassengerId = new Guid("85a1a848-9d5b-4442-b2da-c6887d3c49d0"),
+                            PassengerId = new Guid("967af880-b452-4a64-a91b-fd8425c680f4"),
                             Birthday = new DateTime(1994, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "marija@example.com",
@@ -2370,15 +2369,12 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RadivojeBjelic_DeltaDrive_Delta.Models.Driver", b =>
-                {
-                    b.HasOne("RadivojeBjelic_DeltaDrive_Delta.Models.Passenger", null)
-                        .WithMany("Driver")
-                        .HasForeignKey("PassengerId");
-                });
-
             modelBuilder.Entity("RadivojeBjelic_DeltaDrive_Delta.Models.Passenger", b =>
                 {
+                    b.HasOne("RadivojeBjelic_DeltaDrive_Delta.Models.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("Driver_ID1");
+
                     b.Navigation("Driver");
                 });
 #pragma warning restore 612, 618

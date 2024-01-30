@@ -15,8 +15,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
         public double Longitude { get; set; }
         public decimal StartPrice { get; set; }
         public decimal PricePerKM { get; set; }
-        //public Vehicle Vehicle { get; set; }
-        //public Location Location { get; set; }
+        
 
         public Driver()
         {

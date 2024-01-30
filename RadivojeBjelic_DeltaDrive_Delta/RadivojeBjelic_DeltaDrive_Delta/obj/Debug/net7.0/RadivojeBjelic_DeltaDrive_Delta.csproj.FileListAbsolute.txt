@@ -70,3 +70,4 @@
 /Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/obj/Debug/net7.0/ref/RadivojeBjelic_DeltaDrive_Delta.dll
 /Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/bin/Debug/net7.0/data/delta-drive.csv
 /Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/bin/Debug/net7.0/CsvHelper.dll
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/bin/Debug/net7.0/GeoCoordinate.NetCore.dll

@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "byO45DJrGpQiYJoH74Z/qZTTAZnjEaz4iB7eilcfdfxBRxzl0eVXP+ufNIXRn5HyP7B9IPFtu1NBrIBMuiSHcg==",
+  "dgSpecHash": "nECtPIihBAxgXAZBexOb4j74nSTH9lihPtac4yNm5KoLBoYKMJEKekDcgmDuRHFiT62085ufc2nKQPnN88YiJQ==",
   "success": true,
   "projectFilePath": "/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta.csproj",
   "expectedPackageFiles": [
     "/Users/raca/.nuget/packages/automapper/10.1.1/automapper.10.1.1.nupkg.sha512",
     "/Users/raca/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/8.1.1/automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "/Users/raca/.nuget/packages/csvhelper/30.0.3/csvhelper.30.0.3.nupkg.sha512",
+    "/Users/raca/.nuget/packages/geocoordinate.netcore/1.0.0.1/geocoordinate.netcore.1.0.0.1.nupkg.sha512",
     "/Users/raca/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/raca/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/Users/raca/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
