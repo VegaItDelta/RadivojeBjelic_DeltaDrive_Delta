@@ -26,19 +26,18 @@
 
   <ItemGroup>
     <None Remove="data\" />
-    <None Remove="Models\" />
-    <None Remove="Repository\" />
-    <None Remove="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Repository\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="data\delta-drive.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

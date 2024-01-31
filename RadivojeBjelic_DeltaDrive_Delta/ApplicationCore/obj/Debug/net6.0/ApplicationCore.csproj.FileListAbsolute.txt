@@ -1,0 +1,15 @@
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/bin/Debug/net6.0/ApplicationCore.deps.json
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/bin/Debug/net6.0/ApplicationCore.dll
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/bin/Debug/net6.0/ApplicationCore.pdb
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/bin/Debug/net6.0/Domain.dll
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/bin/Debug/net6.0/Domain.pdb
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/obj/Debug/net6.0/ApplicationCore.csproj.AssemblyReference.cache
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/obj/Debug/net6.0/ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/obj/Debug/net6.0/ApplicationCore.AssemblyInfoInputs.cache
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/obj/Debug/net6.0/ApplicationCore.AssemblyInfo.cs
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/obj/Debug/net6.0/ApplicationCore.csproj.CoreCompileInputs.cache
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/obj/Debug/net6.0/ApplicationCore.csproj.CopyComplete
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/obj/Debug/net6.0/ApplicationCore.dll
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/obj/Debug/net6.0/refint/ApplicationCore.dll
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/obj/Debug/net6.0/ApplicationCore.pdb
+/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/ApplicationCore/obj/Debug/net6.0/ref/ApplicationCore.dll

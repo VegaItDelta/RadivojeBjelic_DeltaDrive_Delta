@@ -1,34 +1,29 @@
 ﻿<Properties StartupConfiguration="{8AF1FBB9-8C4E-40D2-9832-EB4F248C639C}|https">
-  <MonoDevelop.Ide.ItemProperties.RadivojeBjelic__DeltaDrive__Delta PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Domain FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RadivojeBjelic_DeltaDrive_Delta/Models/DriversDBContext.cs">
-    <Files>
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Program.cs" Line="17" Column="15" />
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Models/DriversDBContext.cs" Line="116" Column="23" />
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Models/Passenger.cs" Line="18" Column="20" />
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Models/Driver.cs" Line="9" Column="14" />
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Models/Rating.cs" Line="15" Column="1" />
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Models/DriversDataMap.cs" Line="3" Column="82" />
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Models/DriveRowObject.cs" Line="10" Column="30" />
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Models/Ride.cs" Line="8" Column="30" />
-    </Files>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.ApplicationCore FirstBuild="True" />
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="RadivojeBjelic_DeltaDrive_Delta">
-            <Node name="RadivojeBjelic_DeltaDrive_Delta">
+          <Node name="RadivojeBjelic_DeltaDrive_Delta" expanded="True">
+            <Node name="RadivojeBjelic_DeltaDrive_Delta" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Interfaces" expanded="True" />
               <Node name="Models" expanded="True">
-                <Node name="DriversDBContext.cs" selected="True" />
+                <Node name="PassengerProfile.cs" selected="True" />
               </Node>
+              <Node name="Repository" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Infrastructure FirstBuild="True" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.RadivojeBjelic__DeltaDrive__Delta PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
 </Properties>

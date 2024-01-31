@@ -11,6 +11,7 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
           "CsvHelper": "30.0.3",
           "GeoCoordinate.NetCore": "1.0.0.1",
+          "Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.0",
           "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.0",
@@ -53,6 +54,18 @@
           "lib/net7.0/CsvHelper.dll": {
             "assemblyVersion": "30.0.0.0",
             "fileVersion": "30.0.3.9"
+          }
+        }
+      },
+      "EntityFramework/6.0.0": {
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.20911.0"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.20911.0"
           }
         }
       },
@@ -715,6 +728,40 @@
             "fileVersion": "4.700.19.56404"
           }
         }
+      },
+      "ApplicationCore/1.0.0": {
+        "dependencies": {
+          "Domain": "1.0.0"
+        },
+        "runtime": {
+          "ApplicationCore.dll": {}
+        }
+      },
+      "Domain/1.0.0": {
+        "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
+          "CsvHelper": "30.0.3",
+          "Microsoft.AspNetCore.Identity": "2.2.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.0"
+        },
+        "runtime": {
+          "Domain.dll": {}
+        }
+      },
+      "Infrastructure/1.0.0": {
+        "dependencies": {
+          "ApplicationCore": "1.0.0",
+          "Domain": "1.0.0",
+          "EntityFramework": "6.0.0",
+          "GeoCoordinate.NetCore": "1.0.0.1",
+          "Microsoft.EntityFrameworkCore": "6.0.0",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.0"
+        },
+        "runtime": {
+          "Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -744,6 +791,13 @@
       "sha512": "sha512-OK4xEoPKFZYZ2Km+ZTGRxuLo33u+ipKVCC9ICCGn5JRiAmPLRsCPZ/shL3HKGPwS33MQSPcPHigI4HnX3Q47yg==",
       "path": "csvhelper/30.0.3",
       "hashPath": "csvhelper.30.0.3.nupkg.sha512"
+    },
+    "EntityFramework/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-y6lX/VMghGBV6TvgQS4Q2WK6kAcOoyD+TQxObN9utd0JsMMdMxyqARxKbvgi7KEIbQ8osZ4ZvImaly7l3NDFDw==",
+      "path": "entityframework/6.0.0",
+      "hashPath": "entityframework.6.0.0.nupkg.sha512"
     },
     "GeoCoordinate.NetCore/1.0.0.1": {
       "type": "package",
@@ -1311,6 +1365,21 @@
       "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
+    },
+    "ApplicationCore/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

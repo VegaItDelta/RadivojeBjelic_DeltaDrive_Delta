@@ -11,7 +11,8 @@ public class Program
 
         // Add services to the containerDriversDBContext
         builder.Services.AddDbContext<DriversDBContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnectionString")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnectionString"),
+            x => x.MigrationsAssembly("Infrastructure")));
 
         // Adding Authentication and Jwt Bearer
         // ...
