@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RadivojeBjelic_DeltaDrive_Delta.Interfaces;
@@ -27,23 +28,49 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
             _passengerInterface = passengerRepository;
             _mapper = mapper;
         }
-        // GET: api/values
         [HttpGet]
         public IActionResult GetPassengers()
         {
-            return Ok(_passengerInterface.GetAll().ProjectTo<PassengerDTO>(_mapper.ConfigurationProvider).ToList());
+            try
+            {
+                return Ok(_passengerInterface.GetAll().ProjectTo<PassengerDTO>(_mapper.ConfigurationProvider).ToList());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("rides/{passengerId}")]
+        public IActionResult GetPassengersRideHistory(Guid passengerId)
+        {
+            try
+            {
+                return Ok(_passengerInterface.GetRideHistory(passengerId).ProjectTo<RideDTO>(_mapper.ConfigurationProvider).ToList());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("{id}")]
         public IActionResult GetPassenger(Guid id)
         {
-            var passenger = _passengerInterface.GetById(id);
-            if (passenger == null)
+            try
             {
-                return NotFound();
-            }
+                var passenger = _passengerInterface.GetById(id);
+                if (passenger == null)
+                {
+                    return NotFound();
+                }
 
-            return Ok(_mapper.Map<PassengerDTO>(passenger));
+                return Ok(_mapper.Map<PassengerDTO>(passenger));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]

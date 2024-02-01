@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain;
+using Microsoft.EntityFrameworkCore;
+using RadivojeBjelic_DeltaDrive_Delta.Interfaces;
 using RadivojeBjelic_DeltaDrive_Delta.Models;
+using RadivojeBjelic_DeltaDrive_Delta.Repository;
 
 namespace RadivojeBjelic_DeltaDrive_Delta;
 
@@ -28,6 +31,11 @@ public class Program
                     builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
                 });
         });
+
+        builder.Services.AddAutoMapper(typeof(DeltaDriveProfile));
+
+        builder.Services.AddScoped<IRideInterface, RideRepository>();
+        builder.Services.AddScoped<IPassengerInterface, PassengerRepository>();
 
         var app = builder.Build();
 

@@ -31,6 +31,20 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
         {
             return _context.Passengers;
         }
+        public IQueryable<Ride> GetRideHistory(Guid passengerId)
+        {
+            var passenger = _context.Passengers
+                .Where(p => p.PassengerId == passengerId)
+                .SelectMany(p => p.Rides)
+                .AsQueryable();
+
+            if (passenger == null)
+            {
+                throw new Exception("Passenger not found!");
+            }
+
+            return passenger;
+        }
 
         public Passenger GetById(Guid id)
         {

@@ -95,6 +95,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Passenger> Passengers { get; set; }
         public DbSet<Ride> Rides { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
 
         private void InitializeAndSeedDatabase(string csvFilePath)
         {

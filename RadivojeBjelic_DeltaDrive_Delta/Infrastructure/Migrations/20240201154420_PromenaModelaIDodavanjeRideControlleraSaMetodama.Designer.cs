@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RadivojeBjelic_DeltaDrive_Delta.Models;
 
@@ -11,9 +12,10 @@ using RadivojeBjelic_DeltaDrive_Delta.Models;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DriversDBContext))]
-    partial class DriversDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240201154420_PromenaModelaIDodavanjeRideControlleraSaMetodama")]
+    partial class PromenaModelaIDodavanjeRideControlleraSaMetodama
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

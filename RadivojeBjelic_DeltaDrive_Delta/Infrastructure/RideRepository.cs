@@ -3,6 +3,8 @@ using GeoCoordinatePortable;
 using Microsoft.EntityFrameworkCore;
 using RadivojeBjelic_DeltaDrive_Delta.Interfaces;
 using RadivojeBjelic_DeltaDrive_Delta.Models;
+using static RadivojeBjelic_DeltaDrive_Delta.Models.Driver;
+using static RadivojeBjelic_DeltaDrive_Delta.Models.Ride;
 
 namespace RadivojeBjelic_DeltaDrive_Delta.Repository
 {
@@ -16,7 +18,10 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
         {
             this._context = context;
         }
-
+        public Ride GetById(Guid id)
+        {
+            return _context.Rides.FirstOrDefault(r => r.RideId == id);
+        }
         public void BookARide(Ride ride,Guid driverId)
         {
             var selectedDriver = _context.Drivers.Find(driverId);
@@ -26,8 +31,9 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
             }
             bool isAccepted = TryAcceptRideRequest(driverId, ride.RideId);
 
-            if (isAccepted)
+            if (isAccepted )
             {
+                selectedDriver.DriverStatus = DriversStatus.Busy;
                 ride.Driver_ID = driverId;
                 ride.TotalPrice = CalculateTotalPrice(driverId,ride.StartLatitude, ride.StartLongitude, ride.EndLatitude, ride.EndLongitude);
                 _context.Add(ride);
@@ -58,6 +64,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
             var userLocation = new GeoCoordinate(passengerLatitude, passengerLongitude);
 
             var nearestDrivers = _context.Drivers
+            .Where(d => d.DriverStatus == DriversStatus.Available)
             .Select(d => new
             {
                 Driver = d,
@@ -105,11 +112,15 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
             //u realnom scenariju bi to bilo praceno konstantno jer nije realno da se sam vozac ne pomera sa te lokacije dok ceka sledecu voznju
             driver.Latitude = ride.EndLatitude;
             driver.Longitude = ride.EndLongitude;
-            ride.Status = Ride.RideStatus.Completed;//menjam status voznje u completed kada se ona zavrsi
+            ride.Status = RideStatus.Completed;//menjam status voznje u completed kada se ona zavrsi
 
             _context.SaveChanges();
         }
-
+        public void AddRating(Rating rating)
+        {
+            _context.Ratings.Add(rating);
+            _context.SaveChanges();
+        }
         #region Private Methods
 
         private bool TryAcceptRideRequest(Guid driverId,Guid rideId)
@@ -117,7 +128,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
             var ride = _context.Rides.Find(rideId);
             var driver = _context.Drivers.Find(driverId);
 
-            if (ride == null || driver == null)
+            if (ride == null || driver == null || driver.DriverStatus != DriversStatus.Available)
             {
                 throw new Exception("Ride or driver not found!");
             }
@@ -160,6 +171,8 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
 
             }
         }
+
+        
         #endregion
     }
 }

@@ -10,6 +10,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Interfaces
         void Add(Passenger passenger);
         void Update(Passenger passenger);
         void Delete(Passenger passenger);
+        IQueryable<Ride> GetRideHistory(Guid passengerId);
     }
 }
 
