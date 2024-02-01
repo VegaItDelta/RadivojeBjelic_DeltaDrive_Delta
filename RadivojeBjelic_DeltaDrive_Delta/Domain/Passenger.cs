@@ -14,16 +14,14 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
         public string Email { get; set; }
         [Required]
         [StringLength(50)]
-        public string PassengerName { get; set; }
+        public string FirstName { get; set; }
         [Required]
         [StringLength(50)]
-        public string PassengerLastname { get; set; }
-        [Required]
+        public string Lastname { get; set; }
         [Range(-90,90)]
-        public double PassengersLatitude { get; set; }
-        [Required]
+        public double? PassengersLatitude { get; set; }
         [Range(-180,180)]
-        public double PassengersLongitude { get; set; }
+        public double? PassengersLongitude { get; set; }
         [Required]
         public DateTime Birthday { get; set; }
 

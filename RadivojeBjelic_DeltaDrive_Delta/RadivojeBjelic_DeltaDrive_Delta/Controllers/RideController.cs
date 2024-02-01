@@ -96,7 +96,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
             }
         }
         //metoda za ocenu
-        [HttpPost("rating}")]
+        [HttpPost("rating")]
         public IActionResult AddRating(Rating rating)
         {
             try

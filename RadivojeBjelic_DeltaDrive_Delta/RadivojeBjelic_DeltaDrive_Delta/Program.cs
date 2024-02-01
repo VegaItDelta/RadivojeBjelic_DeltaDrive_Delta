@@ -1,5 +1,11 @@
-﻿using Domain;
+﻿using System;
+using System.Text;
+using System.Text.Json;
+using Domain;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RadivojeBjelic_DeltaDrive_Delta.Interfaces;
 using RadivojeBjelic_DeltaDrive_Delta.Models;
 using RadivojeBjelic_DeltaDrive_Delta.Repository;
@@ -11,6 +17,7 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        
 
         // Add services to the containerDriversDBContext
         builder.Services.AddDbContext<DriversDBContext>(options =>
@@ -19,7 +26,32 @@ public class Program
 
         // Adding Authentication and Jwt Bearer
         // ...
+        builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<DriversDBContext>()
+            .AddDefaultTokenProviders();
 
+        // Adding Authentication  
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+
+        // Adding Jwt Bearer  
+        .AddJwtBearer(options =>
+        {
+            options.SaveToken = true;
+            options.RequireHttpsMetadata = false;
+            options.TokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidAudience = builder.Configuration["Jwt:Audience"],
+                ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            };
+        });
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();

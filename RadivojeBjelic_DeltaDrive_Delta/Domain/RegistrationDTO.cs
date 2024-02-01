@@ -18,8 +18,8 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
         [Required(ErrorMessage = "Users last name is required")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Users birthday name is required")]
-        public  DateTime Birthday { get; set; }
+        [Required(ErrorMessage = "User's birthday is required")]
+        public DateTime Birthday { get; set; }
     }
 }
 

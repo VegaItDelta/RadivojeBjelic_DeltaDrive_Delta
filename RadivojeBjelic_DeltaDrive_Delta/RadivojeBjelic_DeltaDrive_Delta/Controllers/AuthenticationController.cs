@@ -5,10 +5,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using RadivojeBjelic_DeltaDrive_Delta.Interfaces;
 using RadivojeBjelic_DeltaDrive_Delta.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,10 +24,13 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IConfiguration _configuration;
+        private readonly DriversDBContext _context;
 
-        public AuthenticationController(UserManager<ApplicationUser> userManager, IConfiguration configuration)
+        public AuthenticationController(UserManager<ApplicationUser> userManager, IConfiguration configuration,
+           DriversDBContext context)
         {
             this.userManager = userManager;
+            _context = context;
             _configuration = configuration;
         }
 
@@ -85,22 +90,35 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
             ApplicationUser user = new ApplicationUser()
             {
                 Email = model.Email,
-                UserName = model.Email, //Koristim email kao username
+                UserName = model.Email, // Koristim email kao username
                 SecurityStamp = Guid.NewGuid().ToString(),
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Birthday = model.Birthday
             };
 
-            // Kreiranje korisnika sa lozinkom
             var result = userManager.CreateAsync(user, model.Password).GetAwaiter().GetResult();
             if (!result.Succeeded)
             {
-                return BadRequest("Validation failed! Please check user details and try again.");
+                var errors = result.Errors.Select(e => e.Description);
+                return BadRequest(new { message = "Validation failed! Please check user details and try again.", errors });
             }
+
+            // Kreiranje Passenger entiteta
+            var passenger = new Passenger
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                Lastname = user.LastName,
+                Birthday = user.Birthday,
+            };
+
+            _context.Passengers.Add(passenger);
+            _context.SaveChanges();
 
             return Ok();
         }
+
 
 
     }

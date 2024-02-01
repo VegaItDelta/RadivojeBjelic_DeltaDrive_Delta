@@ -12,8 +12,8 @@ using RadivojeBjelic_DeltaDrive_Delta.Models;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DriversDBContext))]
-    [Migration("20240131221934_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240201215322_PromenaModelaValidacije2")]
+    partial class PromenaModelaValidacije2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,15 +24,160 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("RadivojeBjelic_DeltaDrive_Delta.Models.Driver", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<Guid>("Driver_ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Brand")
-                        .IsRequired()
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("RadivojeBjelic_DeltaDrive_Delta.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -41,6 +186,76 @@ namespace Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("RadivojeBjelic_DeltaDrive_Delta.Models.Driver", b =>
+                {
+                    b.Property<Guid>("Driver_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("DriverStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
@@ -66,8 +281,9 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Driver_ID = new Guid("2f309aaa-d28f-41d9-9958-31000dde888c"),
+                            Driver_ID = new Guid("ba865d88-706c-4f3d-a71d-c913bb185d75"),
                             Brand = "Aston Martin Lagonda Ltd",
+                            DriverStatus = 0,
                             FirstName = "Pauline",
                             LastName = "Gunnar",
                             Latitude = 45.216454140074177,
@@ -77,8 +293,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6c0e5122-01ab-4cb3-be3e-d8137904e94b"),
+                            Driver_ID = new Guid("afd0b60d-4882-43fa-ae4f-a51d2c598d69"),
                             Brand = "LEXUS",
+                            DriverStatus = 0,
                             FirstName = "Raina",
                             LastName = "Lula",
                             Latitude = 45.223453054301878,
@@ -88,8 +305,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("db885804-d3fa-417a-bb6e-4bb57791ddba"),
+                            Driver_ID = new Guid("62f836e6-d0c6-4346-88f4-e3420a6efb10"),
                             Brand = "Audi",
+                            DriverStatus = 0,
                             FirstName = "Marc",
                             LastName = "Erin",
                             Latitude = 45.262776103747605,
@@ -99,8 +317,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3836b8c5-02fa-4353-b363-876a353ca8ef"),
+                            Driver_ID = new Guid("47f69343-d9b2-42d3-b648-819258bce26b"),
                             Brand = "Subaru",
+                            DriverStatus = 0,
                             FirstName = "Lombardet",
                             LastName = "Casandra",
                             Latitude = 45.250568287681887,
@@ -110,8 +329,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("9565a9d7-981a-49a9-aa7d-b109d2ebe3c2"),
+                            Driver_ID = new Guid("f74708fa-4e9c-45d0-8ee0-0eb6ea77accb"),
                             Brand = "Dodge",
+                            DriverStatus = 0,
                             FirstName = "Construccion",
                             LastName = "Petty",
                             Latitude = 45.227061274337601,
@@ -121,8 +341,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f406a48d-f033-4c48-bf69-92edaef31766"),
+                            Driver_ID = new Guid("94f6e9b1-2303-49e4-928c-9f183d7e264f"),
                             Brand = "MAZDA",
+                            DriverStatus = 0,
                             FirstName = "Rafal",
                             LastName = "Monserrat",
                             Latitude = 45.282153330425473,
@@ -132,8 +353,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d522e051-53fb-40ab-9e9f-068ce3fe5a4c"),
+                            Driver_ID = new Guid("77cf2b61-30ac-442a-8a1c-3f01e554a93a"),
                             Brand = "Audi",
+                            DriverStatus = 0,
                             FirstName = "Beata",
                             LastName = "Salome",
                             Latitude = 45.29945492843008,
@@ -143,8 +365,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("db7fce03-8c7c-4cbc-b3e3-5b8672cc9a33"),
+                            Driver_ID = new Guid("0b2e40d5-351d-4cbf-9607-36981472dd5b"),
                             Brand = "Aston Martin Lagonda Ltd",
+                            DriverStatus = 0,
                             FirstName = "Knox",
                             LastName = "Lorrie",
                             Latitude = 45.264656353292338,
@@ -154,8 +377,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("97c1872f-f4a7-4a20-b4a0-14fb89a9636a"),
+                            Driver_ID = new Guid("d722edf3-432a-4ebc-afbe-5e0466f3a4de"),
                             Brand = "Bentley",
+                            DriverStatus = 0,
                             FirstName = "Brandy",
                             LastName = "Eleanor",
                             Latitude = 45.299538969878988,
@@ -165,8 +389,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("bbed36f7-c09b-4e11-b462-517555b0db9c"),
+                            Driver_ID = new Guid("2af35b09-eb96-495f-ac3b-7a5fce29f42a"),
                             Brand = "RAM",
+                            DriverStatus = 0,
                             FirstName = "Welch",
                             LastName = "Vaishali",
                             Latitude = 45.226846241954064,
@@ -176,8 +401,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("82ecfb6c-885c-4723-a406-8e06f860e3fb"),
+                            Driver_ID = new Guid("f6887e21-8349-47fb-8ad6-0b33b71af1a6"),
                             Brand = "Pagani Automobili S.p.A.",
+                            DriverStatus = 0,
                             FirstName = "Jamison",
                             LastName = "Ash",
                             Latitude = 45.278270343256636,
@@ -187,8 +413,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("075e8036-a4ba-4720-8e4e-623888a1b527"),
+                            Driver_ID = new Guid("bd58cf63-59d6-46a7-83a2-f218fd29b847"),
                             Brand = "Bentley",
+                            DriverStatus = 0,
                             FirstName = "Liliya",
                             LastName = "Yeliz",
                             Latitude = 45.278508705345807,
@@ -198,8 +425,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("be0edef1-82b8-46b3-82c3-32c1d5905e7e"),
+                            Driver_ID = new Guid("43a7b515-c55b-4316-9bcd-155285f8e39f"),
                             Brand = "Aston Martin Lagonda Ltd",
+                            DriverStatus = 0,
                             FirstName = "Leonard",
                             LastName = "Emerald",
                             Latitude = 45.2572972194831,
@@ -209,8 +437,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("cd2cd1f0-ee88-4995-ad0d-c38a45295d00"),
+                            Driver_ID = new Guid("faabd02f-cb0e-4976-87aa-7b69ea5a2494"),
                             Brand = "Mitsubishi Motors Corporation",
+                            DriverStatus = 0,
                             FirstName = "Bechmann",
                             LastName = "Maikol",
                             Latitude = 45.279071426502327,
@@ -220,8 +449,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("21a16e48-58db-4e40-8f79-8ab4ec7a8fbb"),
+                            Driver_ID = new Guid("1ff88271-8516-405d-b495-67fb8d94ddb7"),
                             Brand = "MASERATI",
+                            DriverStatus = 0,
                             FirstName = "Magali",
                             LastName = "Vibeke",
                             Latitude = 45.21619104847931,
@@ -231,8 +461,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c738c12a-4816-4bb3-8566-6fff586a0d02"),
+                            Driver_ID = new Guid("7ce6a9a3-a5d7-4343-b126-20a565a145a0"),
                             Brand = "Roush",
+                            DriverStatus = 0,
                             FirstName = "Bernardino",
                             LastName = "Danel",
                             Latitude = 45.262091751738382,
@@ -242,8 +473,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5114128a-f086-4a0c-a475-11c18fffc471"),
+                            Driver_ID = new Guid("4b0dade1-3dfc-495c-8d9c-91f00b9a629b"),
                             Brand = "Volvo",
+                            DriverStatus = 0,
                             FirstName = "Zena",
                             LastName = "Kirstein",
                             Latitude = 45.238319779725494,
@@ -253,8 +485,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5657a030-7cf7-44cc-a1b1-354f1fffb1e3"),
+                            Driver_ID = new Guid("ac2b5217-d7c6-41ad-abe5-638f948aa41d"),
                             Brand = "Jaguar",
+                            DriverStatus = 0,
                             FirstName = "Dilini",
                             LastName = "Joy",
                             Latitude = 45.204205166231176,
@@ -264,8 +497,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f14f1d44-bbc0-47a3-ac24-c5fb75a776c3"),
+                            Driver_ID = new Guid("ef53a497-4e0e-4e61-9fc4-f944044f9768"),
                             Brand = "MAZDA",
+                            DriverStatus = 0,
                             FirstName = "Megpg",
                             LastName = "Eunice",
                             Latitude = 45.219490140494258,
@@ -275,8 +509,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("04281792-92cf-4ba2-8f6d-e1f2bc28f018"),
+                            Driver_ID = new Guid("880ea590-28dd-4358-823e-4813b3ce1d4d"),
                             Brand = "CHEVROLET",
+                            DriverStatus = 0,
                             FirstName = "Construccion",
                             LastName = "Rossi",
                             Latitude = 45.287037867075718,
@@ -286,8 +521,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c2813caf-3f33-482b-bcda-ea7e2c68d0d5"),
+                            Driver_ID = new Guid("cf692412-0edb-44b5-84a7-6133edbe61ea"),
                             Brand = "MASERATI",
+                            DriverStatus = 0,
                             FirstName = "Vartan",
                             LastName = "Rhee",
                             Latitude = 45.298049374458131,
@@ -297,8 +533,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("867918f3-ad4a-45f3-b182-4e54176d058e"),
+                            Driver_ID = new Guid("a8fa904b-fca9-4c40-801c-78149640c963"),
                             Brand = "ALFA ROMEO",
+                            DriverStatus = 0,
                             FirstName = "Allison",
                             LastName = "Royden",
                             Latitude = 45.295945743171906,
@@ -308,8 +545,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f5231102-80c8-463c-b764-4337e59c033a"),
+                            Driver_ID = new Guid("8348386d-3524-4caa-b77a-0a801f384ea5"),
                             Brand = "Mercedes-Benz",
+                            DriverStatus = 0,
                             FirstName = "Osvando",
                             LastName = "Nicolaios",
                             Latitude = 45.216763399661289,
@@ -319,8 +557,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("044c8b7a-30dd-48dc-91b5-54111551a2e6"),
+                            Driver_ID = new Guid("b19d250b-c7bc-4743-92e6-6a8fcd7653ea"),
                             Brand = "Roush",
+                            DriverStatus = 0,
                             FirstName = "Rossane",
                             LastName = "Jessica",
                             Latitude = 45.266559868005444,
@@ -330,8 +569,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("47e51dfa-76c2-4d50-8126-8e369f6ad1f2"),
+                            Driver_ID = new Guid("3f03da7a-29bd-4609-9560-f41cf0e4af63"),
                             Brand = "Mini",
+                            DriverStatus = 0,
                             FirstName = "Rue",
                             LastName = "Henrik",
                             Latitude = 45.234728393171295,
@@ -341,8 +581,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("97fef705-46dd-41d2-a02b-dda77368e949"),
+                            Driver_ID = new Guid("5dbc85f4-486e-49ae-af3c-6fec63f1a87c"),
                             Brand = "Honda",
+                            DriverStatus = 0,
                             FirstName = "Libbey",
                             LastName = "Ernest",
                             Latitude = 45.282891901118944,
@@ -352,8 +593,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b570ea38-6041-4e1f-a439-d0464f8f9e4a"),
+                            Driver_ID = new Guid("4c1d079c-7efa-4a3a-9c84-f36b93834913"),
                             Brand = "Bentley",
+                            DriverStatus = 0,
                             FirstName = "Lupita",
                             LastName = "Bennet",
                             Latitude = 45.280486776875811,
@@ -363,8 +605,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d062333d-fe6f-4d92-8a85-d8907fad8c6f"),
+                            Driver_ID = new Guid("7129571f-62e5-45f4-b3eb-f357c568e756"),
                             Brand = "MASERATI",
+                            DriverStatus = 0,
                             FirstName = "Residencia",
                             LastName = "Casper",
                             Latitude = 45.229981095425153,
@@ -374,8 +617,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("22bd40df-ec85-4aaa-9d8a-e153e77c98cd"),
+                            Driver_ID = new Guid("f86e0389-6760-4cd5-a67f-ee32d4615f18"),
                             Brand = "Dodge",
+                            DriverStatus = 0,
                             FirstName = "Andreas",
                             LastName = "Adolfo",
                             Latitude = 45.265939837651047,
@@ -385,8 +629,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("82b7bf13-de4d-461d-bd8e-3ba249b96637"),
+                            Driver_ID = new Guid("84341e82-65d4-4455-a4f4-0ca721948d08"),
                             Brand = "Subaru",
+                            DriverStatus = 0,
                             FirstName = "Luz",
                             LastName = "Jacqui",
                             Latitude = 45.282357438284876,
@@ -396,8 +641,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("2baf16ee-f51a-464a-8cef-d15bf1339b07"),
+                            Driver_ID = new Guid("6203acb7-c726-4c0e-9656-a3d0372eb2cb"),
                             Brand = "Chevrolet",
+                            DriverStatus = 0,
                             FirstName = "Jerome",
                             LastName = "Hoj",
                             Latitude = 45.26187929944556,
@@ -407,8 +653,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a290f848-0813-46c9-a1cd-cb2e03542a1e"),
+                            Driver_ID = new Guid("c71583a8-84a0-46fd-964e-82d472e8a050"),
                             Brand = "Jeep",
+                            DriverStatus = 0,
                             FirstName = "Greening",
                             LastName = "Brockie",
                             Latitude = 45.275815226573968,
@@ -418,8 +665,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ddf9b38e-6a40-448c-9680-66c99ad9ec1f"),
+                            Driver_ID = new Guid("92225f09-dc7a-47eb-aa9c-b0add05b8f58"),
                             Brand = "Chevrolet",
+                            DriverStatus = 0,
                             FirstName = "Krizia",
                             LastName = "Brusovanik",
                             Latitude = 45.267957633744437,
@@ -429,8 +677,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b0c0f812-d997-44fd-904e-9f281535cc0a"),
+                            Driver_ID = new Guid("08a2fab9-1093-44db-a668-8fa67cedb856"),
                             Brand = "Volkswagen",
+                            DriverStatus = 0,
                             FirstName = "Werner",
                             LastName = "Inde",
                             Latitude = 45.221608244262498,
@@ -440,8 +689,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f902a86c-17ec-47f9-8b7a-bd2fbe70feac"),
+                            Driver_ID = new Guid("2540bc97-7f9a-476c-b846-2ae923dad8ae"),
                             Brand = "CHEVROLET",
+                            DriverStatus = 0,
                             FirstName = "Edouard",
                             LastName = "Jehan",
                             Latitude = 45.210031240196187,
@@ -451,8 +701,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("05e8ce12-9b1b-4a42-8c17-20316cc9de66"),
+                            Driver_ID = new Guid("e7664cf2-65d4-4590-8468-0c63e2a9d15d"),
                             Brand = "Volvo",
+                            DriverStatus = 0,
                             FirstName = "Lluvia",
                             LastName = "Judd",
                             Latitude = 45.244554013188768,
@@ -462,8 +713,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("108b7993-5d8c-4e1c-b06a-e2fb2d9b1928"),
+                            Driver_ID = new Guid("73a32013-3b5b-4bee-8297-02f01619cf9f"),
                             Brand = "Acura",
+                            DriverStatus = 0,
                             FirstName = "Jasmine",
                             LastName = "Dorothy",
                             Latitude = 45.209423511503424,
@@ -473,8 +725,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("306220ce-dc37-41f4-84f5-767f19594a5e"),
+                            Driver_ID = new Guid("3f46851c-729d-4930-9ee0-8958f79f7575"),
                             Brand = "Porsche",
+                            DriverStatus = 0,
                             FirstName = "Walker",
                             LastName = "Maruk",
                             Latitude = 45.217759832566678,
@@ -484,8 +737,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("eb60d9db-333c-416a-8770-f9d964de8353"),
+                            Driver_ID = new Guid("716b026b-eaea-43c8-b3ff-b60a81470fa9"),
                             Brand = "TOYOTA",
+                            DriverStatus = 0,
                             FirstName = "Dang",
                             LastName = "Erskine",
                             Latitude = 45.217855950352465,
@@ -495,8 +749,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("0c404bbf-5c14-43bb-a507-e1f01cf22d30"),
+                            Driver_ID = new Guid("f8290f17-be4e-48aa-affa-91725c604b63"),
                             Brand = "Honda",
+                            DriverStatus = 0,
                             FirstName = "Marin",
                             LastName = "Jesus",
                             Latitude = 45.296192164092709,
@@ -506,8 +761,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("77050250-ee8b-4d32-9146-88f1b07f1626"),
+                            Driver_ID = new Guid("223d2bc8-24b1-46e5-b8ff-311f0c5d8d43"),
                             Brand = "GMC",
+                            DriverStatus = 0,
                             FirstName = "Brehan",
                             LastName = "Leonardo",
                             Latitude = 45.284932615672936,
@@ -517,8 +773,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("7ba646f7-83b7-4dd1-9fed-eaab803885ca"),
+                            Driver_ID = new Guid("83ac682f-a927-4858-b54c-99fddf92b701"),
                             Brand = "Chevrolet",
+                            DriverStatus = 0,
                             FirstName = "Trace",
                             LastName = "Gerry",
                             Latitude = 45.290891491829363,
@@ -528,8 +785,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("752bd157-3ff2-4a5e-b32f-c72740cc88ff"),
+                            Driver_ID = new Guid("d919e7d2-71bf-4bd5-bf0d-f2f36b9edac8"),
                             Brand = "Jeep",
+                            DriverStatus = 0,
                             FirstName = "Iya",
                             LastName = "Jhonatan",
                             Latitude = 45.276139257770936,
@@ -539,8 +797,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e0b54961-c13b-4610-ba02-b19fad7e52ea"),
+                            Driver_ID = new Guid("f35236e4-f03d-46c7-9440-33f9c2652769"),
                             Brand = "Jaguar",
+                            DriverStatus = 0,
                             FirstName = "Mannix",
                             LastName = "Gisella",
                             Latitude = 45.296266247572717,
@@ -550,8 +809,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("0afd0520-4095-4e86-97e2-5638a746fdb2"),
+                            Driver_ID = new Guid("d524cb62-f537-44b1-b7ef-7dc7b20127d0"),
                             Brand = "Cadillac",
+                            DriverStatus = 0,
                             FirstName = "Misael",
                             LastName = "Gizelle",
                             Latitude = 45.260938791275308,
@@ -561,8 +821,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("aa6aebbb-2cd2-47b5-9352-5e9508e9f08c"),
+                            Driver_ID = new Guid("d51f40bb-ea38-451a-bee4-d568ada81620"),
                             Brand = "Porsche",
+                            DriverStatus = 0,
                             FirstName = "Chrissy",
                             LastName = "Tanyia",
                             Latitude = 45.279449168518042,
@@ -572,8 +833,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3450e767-0c1a-4fc3-bb85-6c2586a4c50a"),
+                            Driver_ID = new Guid("1e9beb0d-9f0a-44c6-821f-b3886f1fb241"),
                             Brand = "BMW",
+                            DriverStatus = 0,
                             FirstName = "Jacques",
                             LastName = "Lane",
                             Latitude = 45.213790253612132,
@@ -583,8 +845,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e913be81-e033-4fbf-9449-e0eb4d3e4a59"),
+                            Driver_ID = new Guid("b7cca1f7-41be-4141-80ff-5251ac6ccbfe"),
                             Brand = "Mini",
+                            DriverStatus = 0,
                             FirstName = "Jerildy",
                             LastName = "Tzipora",
                             Latitude = 45.26373409468961,
@@ -594,8 +857,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5c850123-20a4-4a25-9c9d-c4a6c0f87e73"),
+                            Driver_ID = new Guid("24da5083-2d93-4975-a39e-b422b27229d5"),
                             Brand = "Land Rover",
+                            DriverStatus = 0,
                             FirstName = "Oja",
                             LastName = "Chin",
                             Latitude = 45.256914630896212,
@@ -605,8 +869,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("60674fdf-43a8-4428-83e3-844ae8adde0e"),
+                            Driver_ID = new Guid("e0917ee6-afe5-444e-8d68-271837cf4b7b"),
                             Brand = "Chrysler",
+                            DriverStatus = 0,
                             FirstName = "Russell",
                             LastName = "Rune",
                             Latitude = 45.223988703409404,
@@ -616,8 +881,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c99d0695-ee18-43bd-b3de-17507a6a7212"),
+                            Driver_ID = new Guid("2eb85bf3-8dd1-4348-98ed-69fc7c3da072"),
                             Brand = "Volvo",
+                            DriverStatus = 0,
                             FirstName = "Jessa",
                             LastName = "Tetiana",
                             Latitude = 45.228208563610373,
@@ -627,8 +893,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("70cf66db-bc5f-4044-af6e-2630534cec67"),
+                            Driver_ID = new Guid("5bc734e9-4d88-432f-8b17-a7be1d734788"),
                             Brand = "Mercedes-Benz",
+                            DriverStatus = 0,
                             FirstName = "Fernanda",
                             LastName = "Berry",
                             Latitude = 45.284341031601357,
@@ -638,8 +905,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("30e3bbb4-a966-4231-aef1-6082989c909a"),
+                            Driver_ID = new Guid("fcc1f714-267c-463c-81a0-3670e1d5a7ce"),
                             Brand = "Jeep",
+                            DriverStatus = 0,
                             FirstName = "Jurg",
                             LastName = "Colleen",
                             Latitude = 45.27947091909018,
@@ -649,8 +917,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3cde6233-f1ce-44c7-866a-0709ccf42a94"),
+                            Driver_ID = new Guid("9ba23a59-656f-4796-a4ec-0722621b5429"),
                             Brand = "INFINITI",
+                            DriverStatus = 0,
                             FirstName = "Jastinder",
                             LastName = "Homero",
                             Latitude = 45.269815899190036,
@@ -660,8 +929,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("fb9c9b08-bf08-4219-87dc-13e076234d69"),
+                            Driver_ID = new Guid("848e6fc2-a55b-438d-b046-1169ba782135"),
                             Brand = "Mercedes-Benz",
+                            DriverStatus = 0,
                             FirstName = "Marielle",
                             LastName = "Orzai",
                             Latitude = 45.247779667723108,
@@ -671,8 +941,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("48546b5b-03f5-48e4-a771-b0fda887bf62"),
+                            Driver_ID = new Guid("37b7dabe-e19e-445c-965f-2eb06d5c4116"),
                             Brand = "Ford",
+                            DriverStatus = 0,
                             FirstName = "Cora",
                             LastName = "Otra",
                             Latitude = 45.278586743787962,
@@ -682,8 +953,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("902250cd-4cd6-469c-be44-8e3cbdb4c2d5"),
+                            Driver_ID = new Guid("f7851892-d9f2-4a41-b028-bac11d40b95b"),
                             Brand = "Lincoln",
+                            DriverStatus = 0,
                             FirstName = "Javid",
                             LastName = "Tranta",
                             Latitude = 45.216149699839988,
@@ -693,8 +965,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("bc2dd468-cbfa-436b-8c06-c63432afe1cb"),
+                            Driver_ID = new Guid("c83d300e-09bc-4fab-9d79-cc6bab123e24"),
                             Brand = "Porsche",
+                            DriverStatus = 0,
                             FirstName = "Jen",
                             LastName = "Shar",
                             Latitude = 45.210580578767569,
@@ -704,8 +977,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("461be80a-a291-4336-ac0d-f90001e39579"),
+                            Driver_ID = new Guid("3fc9e5ad-c94c-4623-af06-16dd1d88a302"),
                             Brand = "Volvo",
+                            DriverStatus = 0,
                             FirstName = "Taryn",
                             LastName = "Bener",
                             Latitude = 45.230507721803349,
@@ -715,8 +989,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1f4ce584-98bc-406b-b729-5df40303ebbd"),
+                            Driver_ID = new Guid("b4e98289-97a4-41f0-9e98-ba45fdc41eff"),
                             Brand = "Rolls-Royce Motor Cars Limited",
+                            DriverStatus = 0,
                             FirstName = "Henrik",
                             LastName = "Edwin",
                             Latitude = 45.260099746320648,
@@ -726,8 +1001,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6293b024-84b3-431f-ac37-59099db222e8"),
+                            Driver_ID = new Guid("a91b4a5c-bf0d-4871-b812-35a526fc637f"),
                             Brand = "Lamborghini",
+                            DriverStatus = 0,
                             FirstName = "Ilhan",
                             LastName = "Reserved",
                             Latitude = 45.269939911723235,
@@ -737,8 +1013,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d852fa79-8ede-4f2d-8468-4c751f3563e6"),
+                            Driver_ID = new Guid("46e29561-2d2c-4ec6-9885-62076f6233dd"),
                             Brand = "Lincoln",
+                            DriverStatus = 0,
                             FirstName = "Delair",
                             LastName = "Meredith",
                             Latitude = 45.252036208353331,
@@ -748,8 +1025,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("77bae0f3-0b04-4ce8-bd39-e172da84ec21"),
+                            Driver_ID = new Guid("7fe12cb1-db6a-486c-a2aa-05d62da31a56"),
                             Brand = "BMW",
+                            DriverStatus = 0,
                             FirstName = "Alessandro",
                             LastName = "Ame",
                             Latitude = 45.213878946434399,
@@ -759,8 +1037,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("dad66d14-6ba1-4f54-92d9-8802800f8a0b"),
+                            Driver_ID = new Guid("affb264c-b51f-42d3-bec8-07084f3bfed3"),
                             Brand = "SCION",
+                            DriverStatus = 0,
                             FirstName = "Vanessa",
                             LastName = "Moran",
                             Latitude = 45.243401442719865,
@@ -770,8 +1049,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("2d4324c1-c640-4625-85af-56e36dfe7528"),
+                            Driver_ID = new Guid("3edc6fa6-bd45-4692-8ba3-eb67eb1ac9e9"),
                             Brand = "Lincoln",
+                            DriverStatus = 0,
                             FirstName = "Geri",
                             LastName = "Miii",
                             Latitude = 45.240326613759379,
@@ -781,8 +1061,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("0e008908-8c04-4253-86d6-8e793946e5ca"),
+                            Driver_ID = new Guid("c3b0580d-0620-47f1-92ff-080acfa7e8bf"),
                             Brand = "NISSAN",
+                            DriverStatus = 0,
                             FirstName = "Rasika",
                             LastName = "Raimundo",
                             Latitude = 45.291779211384224,
@@ -792,8 +1073,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("70de45d2-7745-497d-aa19-cca0ef7da697"),
+                            Driver_ID = new Guid("083f9893-4325-4ad1-8ac4-4bda3199dc8b"),
                             Brand = "Lamborghini",
+                            DriverStatus = 0,
                             FirstName = "Letizia",
                             LastName = "Kerry",
                             Latitude = 45.281638953906281,
@@ -803,8 +1085,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f0061663-8156-4aad-82ec-42d4f28abede"),
+                            Driver_ID = new Guid("ce42ee75-d327-4d90-af6f-209a9cfc5de6"),
                             Brand = "Bentley",
+                            DriverStatus = 0,
                             FirstName = "Ann",
                             LastName = "Canosa",
                             Latitude = 45.204344318934922,
@@ -814,8 +1097,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("7aa5cf58-af0a-41f9-9521-28fb7fb8c8ca"),
+                            Driver_ID = new Guid("5274c7ec-83dd-40a5-b316-fa2ae3def62c"),
                             Brand = "Buick",
+                            DriverStatus = 0,
                             FirstName = "Edie",
                             LastName = "Maeve",
                             Latitude = 45.204068043710627,
@@ -825,8 +1109,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("03fab690-0ade-454f-adc4-778e35a53b03"),
+                            Driver_ID = new Guid("50297c6b-3e76-455d-8c89-7fe180de782e"),
                             Brand = "Roush",
+                            DriverStatus = 0,
                             FirstName = "Evangeline",
                             LastName = "Granados",
                             Latitude = 45.255782205655841,
@@ -836,8 +1121,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e390432e-6166-4b2a-82eb-d34dbfe2f05b"),
+                            Driver_ID = new Guid("03ce30c8-01b2-46c2-aa23-7f4acb08efe8"),
                             Brand = "Mitsubishi Motors Corporation",
+                            DriverStatus = 0,
                             FirstName = "Yev",
                             LastName = "Leeann",
                             Latitude = 45.243827207876294,
@@ -847,8 +1133,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4d0face9-518c-43eb-804d-6e93cc6e47af"),
+                            Driver_ID = new Guid("4d9a4ace-46bd-4903-a002-35781b2d201a"),
                             Brand = "FIAT",
+                            DriverStatus = 0,
                             FirstName = "Harold",
                             LastName = "Karl",
                             Latitude = 45.286324628710155,
@@ -858,8 +1145,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f21126e4-e5cc-4299-bf9e-ad8871fd906c"),
+                            Driver_ID = new Guid("f8a4e3a8-1fdc-440d-9529-eac811715cf0"),
                             Brand = "Chrysler",
+                            DriverStatus = 0,
                             FirstName = "Ibrahim",
                             LastName = "Alina",
                             Latitude = 45.2993118675817,
@@ -869,8 +1157,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("bf973366-76c0-40e0-9808-9f094d0f1831"),
+                            Driver_ID = new Guid("60ac3731-097d-4123-a36a-97386defa334"),
                             Brand = "RAM",
+                            DriverStatus = 0,
                             FirstName = "Renata",
                             LastName = "Yadi",
                             Latitude = 45.296758424609912,
@@ -880,8 +1169,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("2bcb0f22-7167-47bd-8543-3167987237c3"),
+                            Driver_ID = new Guid("5693f714-eb4c-4fa9-b9bc-04adb3792f33"),
                             Brand = "TOYOTA",
+                            DriverStatus = 0,
                             FirstName = "Aden",
                             LastName = "Eliza",
                             Latitude = 45.268648133812405,
@@ -891,8 +1181,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("908499d4-fd5a-496d-b812-9a5b6fcb7578"),
+                            Driver_ID = new Guid("f2346c64-aa56-451d-9a4f-f3724aa1e32a"),
                             Brand = "Mini",
+                            DriverStatus = 0,
                             FirstName = "Maurits",
                             LastName = "Paulien",
                             Latitude = 45.296887928208001,
@@ -902,8 +1193,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1c801a72-8d86-4293-a511-c3e810ea99db"),
+                            Driver_ID = new Guid("b4b0dac4-fdaf-4557-83cf-c345a31da81d"),
                             Brand = "McLaren",
+                            DriverStatus = 0,
                             FirstName = "Flora",
                             LastName = "Allesdandro",
                             Latitude = 45.250220306572913,
@@ -913,8 +1205,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("dd44f5bd-9909-4e06-8571-6107bc150d54"),
+                            Driver_ID = new Guid("458b188e-e401-40b7-b7d7-1e123b94c7cb"),
                             Brand = "Acura",
+                            DriverStatus = 0,
                             FirstName = "Anais",
                             LastName = "Johnna",
                             Latitude = 45.287676498702332,
@@ -924,8 +1217,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("818df617-3c0f-48b4-ba9e-8cdceac7fe1f"),
+                            Driver_ID = new Guid("ba8a7ad5-85e6-4c5b-89d0-77768141c227"),
                             Brand = "Land Rover",
+                            DriverStatus = 0,
                             FirstName = "Maurits",
                             LastName = "Anurag",
                             Latitude = 45.253925064457675,
@@ -935,8 +1229,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("49ee95f7-daf1-4297-a9e5-ee730c1e1c1a"),
+                            Driver_ID = new Guid("7c79aa8d-be35-4102-99ba-3e280d6b9ae5"),
                             Brand = "MAZDA",
+                            DriverStatus = 0,
                             FirstName = "Callaghan",
                             LastName = "Aiden",
                             Latitude = 45.215384546791014,
@@ -946,8 +1241,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e5d1195b-0a31-421a-9298-bd488c872b73"),
+                            Driver_ID = new Guid("df290688-95ac-4831-899d-beb334626fa7"),
                             Brand = "INFINITI",
+                            DriverStatus = 0,
                             FirstName = "Haas",
                             LastName = "Chad",
                             Latitude = 45.288022877311491,
@@ -957,8 +1253,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("27d1b77b-c8f0-4331-b51d-62cc38cc24eb"),
+                            Driver_ID = new Guid("8a76c6f9-345c-4774-984a-9643eb5a4677"),
                             Brand = "Mini",
+                            DriverStatus = 0,
                             FirstName = "Dianna",
                             LastName = "Michal",
                             Latitude = 45.247323100321054,
@@ -968,8 +1265,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d5c7c579-4e95-4787-aa91-fb35268240ce"),
+                            Driver_ID = new Guid("9b13cfb9-9995-4d79-ba8b-7b39f28afba9"),
                             Brand = "INFINITI",
+                            DriverStatus = 0,
                             FirstName = "Deepti",
                             LastName = "Devara",
                             Latitude = 45.275913260410107,
@@ -979,8 +1277,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("7ce42012-1531-450f-9b29-4db42c019131"),
+                            Driver_ID = new Guid("a8e74523-df5e-4505-9edd-e8bc31aa028d"),
                             Brand = "Pagani Automobili S.p.A.",
+                            DriverStatus = 0,
                             FirstName = "Morrissey",
                             LastName = "Kellie",
                             Latitude = 45.274651670577768,
@@ -990,8 +1289,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("125e0455-7507-40b4-8eae-20a1e0ce762c"),
+                            Driver_ID = new Guid("ca7454ed-953f-4fca-82a9-276f18853517"),
                             Brand = "Aston Martin Lagonda Ltd",
+                            DriverStatus = 0,
                             FirstName = "Elliot",
                             LastName = "Loiselin",
                             Latitude = 45.222723321894421,
@@ -1001,8 +1301,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4b43d9c2-bec1-4e14-bdab-cb65c00c525b"),
+                            Driver_ID = new Guid("e0e5e7be-f7cc-4da4-84ef-06c3d22bcba7"),
                             Brand = "Cadillac",
+                            DriverStatus = 0,
                             FirstName = "Olga",
                             LastName = "Kristen",
                             Latitude = 45.29340112834867,
@@ -1012,8 +1313,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5456deef-0b28-4651-8a30-36cd1c2746ff"),
+                            Driver_ID = new Guid("5ef2c573-8c3c-4171-9721-a7387e50e595"),
                             Brand = "Roush",
+                            DriverStatus = 0,
                             FirstName = "Dahlia",
                             LastName = "Pandora",
                             Latitude = 45.222647874969191,
@@ -1023,8 +1325,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("be8c81b2-6524-4029-b864-b00fe69eddb5"),
+                            Driver_ID = new Guid("3da33617-32e3-42ea-b7eb-6a6301c1b134"),
                             Brand = "Porsche",
+                            DriverStatus = 0,
                             FirstName = "Vlada",
                             LastName = "Marisela",
                             Latitude = 45.275549215170642,
@@ -1034,8 +1337,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c259e9fc-616a-49a8-9a4d-d95a3f281efc"),
+                            Driver_ID = new Guid("fde07054-1f0f-428a-8038-513e1984ba9b"),
                             Brand = "Ford",
+                            DriverStatus = 0,
                             FirstName = "Leif",
                             LastName = "Nalini",
                             Latitude = 45.281617289392479,
@@ -1045,8 +1349,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4e1dddc4-94d2-4bc5-a96e-d0a0703aa3e0"),
+                            Driver_ID = new Guid("c2f11500-5ac6-4d43-8307-640ebc594612"),
                             Brand = "Lamborghini",
+                            DriverStatus = 0,
                             FirstName = "Aparna",
                             LastName = "Segundo",
                             Latitude = 45.225215199148884,
@@ -1056,8 +1361,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5ea6d691-114d-4bb5-a927-6e05b002193c"),
+                            Driver_ID = new Guid("6bd027cb-6a41-4beb-99a5-6657d471ddc6"),
                             Brand = "Audi",
+                            DriverStatus = 0,
                             FirstName = "Carling",
                             LastName = "Angeles",
                             Latitude = 45.256456267336631,
@@ -1067,8 +1373,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d2e13c47-8287-4061-8ff0-55c3fb329f4f"),
+                            Driver_ID = new Guid("65c16ed5-752d-4e00-a0cf-ffb5130b0a02"),
                             Brand = "INFINITI",
+                            DriverStatus = 0,
                             FirstName = "Bici",
                             LastName = "Travis",
                             Latitude = 45.201686751190202,
@@ -1078,8 +1385,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c8f23b56-ec03-4e04-841b-10d67679d917"),
+                            Driver_ID = new Guid("24f4082f-91ea-47be-925b-da526946ea49"),
                             Brand = "Aston Martin Lagonda Ltd",
+                            DriverStatus = 0,
                             FirstName = "Oracio",
                             LastName = "Richie",
                             Latitude = 45.224688333074994,
@@ -1089,8 +1397,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("0c235dc6-ce75-46dc-9567-ed468d35a7e3"),
+                            Driver_ID = new Guid("73188adf-eb4c-419d-8935-f2524c3d22d2"),
                             Brand = "Porsche",
+                            DriverStatus = 0,
                             FirstName = "Lily",
                             LastName = "Eugenia",
                             Latitude = 45.257195153791159,
@@ -1100,8 +1409,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b60ac7d3-4edf-4556-9c8d-43dfd1efc024"),
+                            Driver_ID = new Guid("1e290609-4924-408e-867b-ac640394a340"),
                             Brand = "Lincoln",
+                            DriverStatus = 0,
                             FirstName = "Gert",
                             LastName = "Andres",
                             Latitude = 45.279225594403293,
@@ -1111,8 +1421,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("fb6fa24d-b205-4bba-bda9-d20514a1d6eb"),
+                            Driver_ID = new Guid("b16a2521-8f3c-4534-8fb0-0ed4adacd848"),
                             Brand = "Honda",
+                            DriverStatus = 0,
                             FirstName = "Talbot",
                             LastName = "Carwen",
                             Latitude = 45.250169050776421,
@@ -1122,8 +1433,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ea8ce5e9-d20a-4761-bf8d-cb75bc6620f8"),
+                            Driver_ID = new Guid("9f28b90e-bd85-4244-83aa-1decfc56431f"),
                             Brand = "Volvo",
+                            DriverStatus = 0,
                             FirstName = "Emma",
                             LastName = "Tasha",
                             Latitude = 45.285854370015166,
@@ -1133,8 +1445,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ad4446a9-082c-4f60-b7a0-f35ba3bdbb0a"),
+                            Driver_ID = new Guid("ab7823ef-f567-4f21-acb9-e9016a2aa8f2"),
                             Brand = "TOYOTA",
+                            DriverStatus = 0,
                             FirstName = "Henry",
                             LastName = "Violoncella",
                             Latitude = 45.220604547812769,
@@ -1144,8 +1457,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e747edbe-54c7-461f-a981-1cfdb0aa51db"),
+                            Driver_ID = new Guid("cb7525b7-8686-48e6-88ef-894d862d8c42"),
                             Brand = "Roush",
+                            DriverStatus = 0,
                             FirstName = "Iva",
                             LastName = "Sloane",
                             Latitude = 45.218399244374908,
@@ -1155,8 +1469,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("60ebd855-127e-4c80-af7d-91ba178d99b5"),
+                            Driver_ID = new Guid("f51f9d1f-7787-4081-8172-b2392f9f6b32"),
                             Brand = "Mini",
+                            DriverStatus = 0,
                             FirstName = "Larae",
                             LastName = "Lindsey",
                             Latitude = 45.288988349342716,
@@ -1166,8 +1481,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b8f05e00-a441-4e73-9bb4-a83dc1526b5e"),
+                            Driver_ID = new Guid("9677e745-b0f3-420c-8a01-6569ce5b9030"),
                             Brand = "Aston Martin Lagonda Ltd",
+                            DriverStatus = 0,
                             FirstName = "Pauline",
                             LastName = "Gunnar",
                             Latitude = 45.216454140074177,
@@ -1177,8 +1493,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("dd917af0-2b32-4b19-918d-090d072a9e38"),
+                            Driver_ID = new Guid("c9f2e58e-fde0-41a8-9eeb-07830b63c101"),
                             Brand = "LEXUS",
+                            DriverStatus = 0,
                             FirstName = "Raina",
                             LastName = "Lula",
                             Latitude = 45.223453054301878,
@@ -1188,8 +1505,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c3b2d051-4bea-430a-ba2c-6237385a6323"),
+                            Driver_ID = new Guid("eb736b5a-2720-4e5c-a5ad-bb6c6549a0d0"),
                             Brand = "Audi",
+                            DriverStatus = 0,
                             FirstName = "Marc",
                             LastName = "Erin",
                             Latitude = 45.262776103747605,
@@ -1199,8 +1517,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("cbde1468-fd2b-4e7a-9451-fd9bf7f1247e"),
+                            Driver_ID = new Guid("47fc277c-6b71-4bf6-93ac-974c5784eb07"),
                             Brand = "Subaru",
+                            DriverStatus = 0,
                             FirstName = "Lombardet",
                             LastName = "Casandra",
                             Latitude = 45.250568287681887,
@@ -1210,8 +1529,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("eab31a7f-c00b-46da-b417-f1ccdeed11d7"),
+                            Driver_ID = new Guid("15e25473-1d7b-4760-badd-03383d73adc6"),
                             Brand = "Dodge",
+                            DriverStatus = 0,
                             FirstName = "Construccion",
                             LastName = "Petty",
                             Latitude = 45.227061274337601,
@@ -1221,8 +1541,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("7de509d7-8fc0-4a63-a5c8-593a015a85ca"),
+                            Driver_ID = new Guid("8596309d-6ad0-459d-b70c-c10eaea784ee"),
                             Brand = "MAZDA",
+                            DriverStatus = 0,
                             FirstName = "Rafal",
                             LastName = "Monserrat",
                             Latitude = 45.282153330425473,
@@ -1232,8 +1553,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("aa957d23-ef55-42f5-9363-d0f3be33e4a6"),
+                            Driver_ID = new Guid("16bc357a-b918-4b64-a06e-7675de973c07"),
                             Brand = "Audi",
+                            DriverStatus = 0,
                             FirstName = "Beata",
                             LastName = "Salome",
                             Latitude = 45.29945492843008,
@@ -1243,8 +1565,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f7c9c2b0-9244-470b-b794-a33b438877de"),
+                            Driver_ID = new Guid("0276958e-3523-4f91-8c16-5b0b76f47897"),
                             Brand = "Aston Martin Lagonda Ltd",
+                            DriverStatus = 0,
                             FirstName = "Knox",
                             LastName = "Lorrie",
                             Latitude = 45.264656353292338,
@@ -1254,8 +1577,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("29cdd1a1-1609-41d1-8b0a-068f7df1faaa"),
+                            Driver_ID = new Guid("8fb2c71c-59ee-4f4e-a817-a31d9c290f7f"),
                             Brand = "Bentley",
+                            DriverStatus = 0,
                             FirstName = "Brandy",
                             LastName = "Eleanor",
                             Latitude = 45.299538969878988,
@@ -1265,8 +1589,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ea16ab2f-22b2-4191-9d38-42aaab2ea8f9"),
+                            Driver_ID = new Guid("8d49ce71-938d-43ee-8821-c5abe05464d4"),
                             Brand = "RAM",
+                            DriverStatus = 0,
                             FirstName = "Welch",
                             LastName = "Vaishali",
                             Latitude = 45.226846241954064,
@@ -1276,8 +1601,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ba7285e5-8e3d-45bd-9951-2a52e469204c"),
+                            Driver_ID = new Guid("436ee8a0-5c8c-4807-b360-113ebc1c0178"),
                             Brand = "Pagani Automobili S.p.A.",
+                            DriverStatus = 0,
                             FirstName = "Jamison",
                             LastName = "Ash",
                             Latitude = 45.278270343256636,
@@ -1287,8 +1613,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e751d6c3-c2f3-4b7e-bf5d-ce29643e65a5"),
+                            Driver_ID = new Guid("c56a87f4-b157-4248-89f2-fa316e939c44"),
                             Brand = "Bentley",
+                            DriverStatus = 0,
                             FirstName = "Liliya",
                             LastName = "Yeliz",
                             Latitude = 45.278508705345807,
@@ -1298,8 +1625,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("245034df-c1d8-474d-bcdd-34757b3dbe89"),
+                            Driver_ID = new Guid("e7b6a207-645a-45b8-8b91-00304ca373dc"),
                             Brand = "Aston Martin Lagonda Ltd",
+                            DriverStatus = 0,
                             FirstName = "Leonard",
                             LastName = "Emerald",
                             Latitude = 45.2572972194831,
@@ -1309,8 +1637,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b90ea8c9-8afb-49db-96e5-f5deab1632ef"),
+                            Driver_ID = new Guid("f15a1944-6f58-45de-8942-f0de0d2fd7e2"),
                             Brand = "Mitsubishi Motors Corporation",
+                            DriverStatus = 0,
                             FirstName = "Bechmann",
                             LastName = "Maikol",
                             Latitude = 45.279071426502327,
@@ -1320,8 +1649,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b050d01e-78d6-4efa-842d-b66404388a8c"),
+                            Driver_ID = new Guid("54143737-7b74-43d2-b84a-ff423d46d825"),
                             Brand = "MASERATI",
+                            DriverStatus = 0,
                             FirstName = "Magali",
                             LastName = "Vibeke",
                             Latitude = 45.21619104847931,
@@ -1331,8 +1661,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f1e8ce6a-3012-44a0-bcac-703b92e9d7a2"),
+                            Driver_ID = new Guid("b9ce1f5e-a4e0-422c-885e-a72604aa7ef9"),
                             Brand = "Roush",
+                            DriverStatus = 0,
                             FirstName = "Bernardino",
                             LastName = "Danel",
                             Latitude = 45.262091751738382,
@@ -1342,8 +1673,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("53c455e4-58c5-45c0-a75b-565ece3bbf5f"),
+                            Driver_ID = new Guid("ad19fe84-74ef-4223-b7fa-c551c430b686"),
                             Brand = "Volvo",
+                            DriverStatus = 0,
                             FirstName = "Zena",
                             LastName = "Kirstein",
                             Latitude = 45.238319779725494,
@@ -1353,8 +1685,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("deff0900-d12a-4d20-b7b2-78943da301b6"),
+                            Driver_ID = new Guid("3adb1c9d-11ae-4016-ae5d-2fb98573f898"),
                             Brand = "Jaguar",
+                            DriverStatus = 0,
                             FirstName = "Dilini",
                             LastName = "Joy",
                             Latitude = 45.204205166231176,
@@ -1364,8 +1697,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c0d20491-9f8e-45c4-9d59-9184821281b8"),
+                            Driver_ID = new Guid("a95a5367-42a7-4ef5-be18-756775ec3db9"),
                             Brand = "MAZDA",
+                            DriverStatus = 0,
                             FirstName = "Megpg",
                             LastName = "Eunice",
                             Latitude = 45.219490140494258,
@@ -1375,8 +1709,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b5408978-a1bf-4d86-a0d1-c010ece7c6ae"),
+                            Driver_ID = new Guid("7bbd3df0-78fd-4c26-8a63-7f4070f3617f"),
                             Brand = "CHEVROLET",
+                            DriverStatus = 0,
                             FirstName = "Construccion",
                             LastName = "Rossi",
                             Latitude = 45.287037867075718,
@@ -1386,8 +1721,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("fc83164f-fe5d-4ecf-a0a7-e9c511c3c624"),
+                            Driver_ID = new Guid("1828ae34-7bae-4f43-adf6-acd0b63022c4"),
                             Brand = "MASERATI",
+                            DriverStatus = 0,
                             FirstName = "Vartan",
                             LastName = "Rhee",
                             Latitude = 45.298049374458131,
@@ -1397,8 +1733,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f6a1daa0-a792-4ed1-9d8a-860375a0d4fa"),
+                            Driver_ID = new Guid("c0230818-518c-4cf7-9a22-8f3755e8ca44"),
                             Brand = "ALFA ROMEO",
+                            DriverStatus = 0,
                             FirstName = "Allison",
                             LastName = "Royden",
                             Latitude = 45.295945743171906,
@@ -1408,8 +1745,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("266f3066-8693-495d-bf17-3921a45e3e24"),
+                            Driver_ID = new Guid("dcfc7e53-3d48-4677-83e3-2a33ae516ac2"),
                             Brand = "Mercedes-Benz",
+                            DriverStatus = 0,
                             FirstName = "Osvando",
                             LastName = "Nicolaios",
                             Latitude = 45.216763399661289,
@@ -1419,8 +1757,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("9dd2dcdc-04f3-450e-b17c-e278a897e88c"),
+                            Driver_ID = new Guid("7a5a675a-fb40-4d21-9040-c935a3bce809"),
                             Brand = "Roush",
+                            DriverStatus = 0,
                             FirstName = "Rossane",
                             LastName = "Jessica",
                             Latitude = 45.266559868005444,
@@ -1430,8 +1769,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("af5e27cb-1506-44a2-85f4-48f239ef14c2"),
+                            Driver_ID = new Guid("0330435b-4793-4631-9899-baefc00679f2"),
                             Brand = "Mini",
+                            DriverStatus = 0,
                             FirstName = "Rue",
                             LastName = "Henrik",
                             Latitude = 45.234728393171295,
@@ -1441,8 +1781,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("395a9d10-01fe-412f-a696-bacf149f6ecc"),
+                            Driver_ID = new Guid("4cec807d-f57c-4e9a-9dce-1b57456cd058"),
                             Brand = "Honda",
+                            DriverStatus = 0,
                             FirstName = "Libbey",
                             LastName = "Ernest",
                             Latitude = 45.282891901118944,
@@ -1452,8 +1793,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("34a0f19e-e11b-434f-b085-249df01fddda"),
+                            Driver_ID = new Guid("507c973f-b336-4516-a8a2-19b33a370e8d"),
                             Brand = "Bentley",
+                            DriverStatus = 0,
                             FirstName = "Lupita",
                             LastName = "Bennet",
                             Latitude = 45.280486776875811,
@@ -1463,8 +1805,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ecce5250-ae16-4fe9-80e9-73645ab2ae05"),
+                            Driver_ID = new Guid("670a1db3-3001-4dcb-bcf5-d7d4c78d21b6"),
                             Brand = "MASERATI",
+                            DriverStatus = 0,
                             FirstName = "Residencia",
                             LastName = "Casper",
                             Latitude = 45.229981095425153,
@@ -1474,8 +1817,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("812b0c2a-2707-4058-9e4f-4f361f36f791"),
+                            Driver_ID = new Guid("dfd11246-a654-4725-9e29-5dbb734bcb16"),
                             Brand = "Dodge",
+                            DriverStatus = 0,
                             FirstName = "Andreas",
                             LastName = "Adolfo",
                             Latitude = 45.265939837651047,
@@ -1485,8 +1829,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("30f571b3-a2a7-4a62-afd6-baa4ae8a9995"),
+                            Driver_ID = new Guid("89830222-8e16-40b1-922c-f590e5716f4a"),
                             Brand = "Subaru",
+                            DriverStatus = 0,
                             FirstName = "Luz",
                             LastName = "Jacqui",
                             Latitude = 45.282357438284876,
@@ -1496,8 +1841,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("41022739-3c60-4c45-b1fa-8a330692431f"),
+                            Driver_ID = new Guid("2fbccadc-2bd6-4b92-8014-2da8ee616e7a"),
                             Brand = "Chevrolet",
+                            DriverStatus = 0,
                             FirstName = "Jerome",
                             LastName = "Hoj",
                             Latitude = 45.26187929944556,
@@ -1507,8 +1853,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("805bffbf-53f3-4f3b-afc5-1c87d8922cd8"),
+                            Driver_ID = new Guid("c7aa3dbd-f54f-49c0-9881-c9e0358fe124"),
                             Brand = "Jeep",
+                            DriverStatus = 0,
                             FirstName = "Greening",
                             LastName = "Brockie",
                             Latitude = 45.275815226573968,
@@ -1518,8 +1865,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("74338a17-98ae-4963-8de0-db9f92639ec1"),
+                            Driver_ID = new Guid("041140bc-af78-44cb-ba25-ffae442770b0"),
                             Brand = "Chevrolet",
+                            DriverStatus = 0,
                             FirstName = "Krizia",
                             LastName = "Brusovanik",
                             Latitude = 45.267957633744437,
@@ -1529,8 +1877,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("9d53aba3-94aa-4e15-9ef4-f2f46743e473"),
+                            Driver_ID = new Guid("95952a98-4dd6-4498-99d4-fb505002db13"),
                             Brand = "Volkswagen",
+                            DriverStatus = 0,
                             FirstName = "Werner",
                             LastName = "Inde",
                             Latitude = 45.221608244262498,
@@ -1540,8 +1889,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3e1a2000-aeec-499c-bac1-8078fa340d7c"),
+                            Driver_ID = new Guid("e2574027-64f7-45d6-b0f3-7c479577bdb2"),
                             Brand = "CHEVROLET",
+                            DriverStatus = 0,
                             FirstName = "Edouard",
                             LastName = "Jehan",
                             Latitude = 45.210031240196187,
@@ -1551,8 +1901,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("914866ec-49e5-4cc3-939c-a8ad1b5b4752"),
+                            Driver_ID = new Guid("3abc3092-03bc-4357-91fc-bff9bf02ffb5"),
                             Brand = "Volvo",
+                            DriverStatus = 0,
                             FirstName = "Lluvia",
                             LastName = "Judd",
                             Latitude = 45.244554013188768,
@@ -1562,8 +1913,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("cee32e4f-69ac-4e7d-89b4-884b4468bf95"),
+                            Driver_ID = new Guid("3c781a53-da6c-4ca7-b46c-d8889aa661ce"),
                             Brand = "Acura",
+                            DriverStatus = 0,
                             FirstName = "Jasmine",
                             LastName = "Dorothy",
                             Latitude = 45.209423511503424,
@@ -1573,8 +1925,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1ca42713-1ee2-4bba-b9f3-ed9919236313"),
+                            Driver_ID = new Guid("0d134d1c-e575-42c3-8638-44b0cf416a7e"),
                             Brand = "Porsche",
+                            DriverStatus = 0,
                             FirstName = "Walker",
                             LastName = "Maruk",
                             Latitude = 45.217759832566678,
@@ -1584,8 +1937,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("238947c2-efac-442d-b2f1-debb0e62e9c9"),
+                            Driver_ID = new Guid("260f4ba6-388a-4925-b94e-d2acc473e749"),
                             Brand = "TOYOTA",
+                            DriverStatus = 0,
                             FirstName = "Dang",
                             LastName = "Erskine",
                             Latitude = 45.217855950352465,
@@ -1595,8 +1949,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c6da2802-7b31-4df1-b625-fa210b67b98a"),
+                            Driver_ID = new Guid("bba79386-3ae4-493f-828a-38395818dcc1"),
                             Brand = "Honda",
+                            DriverStatus = 0,
                             FirstName = "Marin",
                             LastName = "Jesus",
                             Latitude = 45.296192164092709,
@@ -1606,8 +1961,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("fe7feb69-7ecd-4bd2-b3cb-fc03095d0ef2"),
+                            Driver_ID = new Guid("02004f91-7eda-48ec-bb96-df1399fa6552"),
                             Brand = "GMC",
+                            DriverStatus = 0,
                             FirstName = "Brehan",
                             LastName = "Leonardo",
                             Latitude = 45.284932615672936,
@@ -1617,8 +1973,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("457f51f2-1fb0-493d-ae07-bc3c82b6ffc8"),
+                            Driver_ID = new Guid("73c0df0e-1467-430c-860e-fa96a609eb97"),
                             Brand = "Chevrolet",
+                            DriverStatus = 0,
                             FirstName = "Trace",
                             LastName = "Gerry",
                             Latitude = 45.290891491829363,
@@ -1628,8 +1985,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ba39063b-4bc9-41f9-8d16-bcbfe1f77e84"),
+                            Driver_ID = new Guid("c68cf44a-45d4-4bca-9ee0-0aa1dff950cb"),
                             Brand = "Jeep",
+                            DriverStatus = 0,
                             FirstName = "Iya",
                             LastName = "Jhonatan",
                             Latitude = 45.276139257770936,
@@ -1639,8 +1997,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("04c0e772-a2c7-4348-811f-5fbd35b186e9"),
+                            Driver_ID = new Guid("8440f772-b4e4-4b45-a4b0-7f4c29363e62"),
                             Brand = "Jaguar",
+                            DriverStatus = 0,
                             FirstName = "Mannix",
                             LastName = "Gisella",
                             Latitude = 45.296266247572717,
@@ -1650,8 +2009,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5a5c8759-c74d-4940-ae24-2741f3d4463e"),
+                            Driver_ID = new Guid("322ba710-be24-4661-994a-ac39f07c7d99"),
                             Brand = "Cadillac",
+                            DriverStatus = 0,
                             FirstName = "Misael",
                             LastName = "Gizelle",
                             Latitude = 45.260938791275308,
@@ -1661,8 +2021,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e3891920-093b-4505-8d88-3edfd71af174"),
+                            Driver_ID = new Guid("100229d3-fa94-45c6-8695-ba0aeb7b27c8"),
                             Brand = "Porsche",
+                            DriverStatus = 0,
                             FirstName = "Chrissy",
                             LastName = "Tanyia",
                             Latitude = 45.279449168518042,
@@ -1672,8 +2033,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6005e0e2-193d-483c-89a6-b58e19550feb"),
+                            Driver_ID = new Guid("09cee71b-a69e-483e-9ff6-e8dc58dbd27d"),
                             Brand = "BMW",
+                            DriverStatus = 0,
                             FirstName = "Jacques",
                             LastName = "Lane",
                             Latitude = 45.213790253612132,
@@ -1683,8 +2045,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("de673212-bcd9-488d-91b1-05a58255a1a4"),
+                            Driver_ID = new Guid("307fd15d-d31b-46b7-9426-6eadb903b82a"),
                             Brand = "Mini",
+                            DriverStatus = 0,
                             FirstName = "Jerildy",
                             LastName = "Tzipora",
                             Latitude = 45.26373409468961,
@@ -1694,8 +2057,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f47f00b3-31f5-451b-ac73-0448dcf217d7"),
+                            Driver_ID = new Guid("1970ceef-b216-4461-9be2-f1f46d7f5c55"),
                             Brand = "Land Rover",
+                            DriverStatus = 0,
                             FirstName = "Oja",
                             LastName = "Chin",
                             Latitude = 45.256914630896212,
@@ -1705,8 +2069,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("21518100-0d0d-4a81-a6b6-ff459f611f3d"),
+                            Driver_ID = new Guid("8f0632eb-c3a9-4cd1-8167-93d394b3a179"),
                             Brand = "Chrysler",
+                            DriverStatus = 0,
                             FirstName = "Russell",
                             LastName = "Rune",
                             Latitude = 45.223988703409404,
@@ -1716,8 +2081,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1d0ee7d7-7380-48de-93a4-16fbd6d92995"),
+                            Driver_ID = new Guid("3959763c-421d-4f36-8d28-5a8a635132c9"),
                             Brand = "Volvo",
+                            DriverStatus = 0,
                             FirstName = "Jessa",
                             LastName = "Tetiana",
                             Latitude = 45.228208563610373,
@@ -1727,8 +2093,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e8bc8f61-37f5-434d-8323-66edc2a2b5bd"),
+                            Driver_ID = new Guid("d752ed1a-9c2d-48a5-ab19-c2628aa3c01a"),
                             Brand = "Mercedes-Benz",
+                            DriverStatus = 0,
                             FirstName = "Fernanda",
                             LastName = "Berry",
                             Latitude = 45.284341031601357,
@@ -1738,8 +2105,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("774e24d1-d5c4-4e35-8d3b-d5c98ca8d024"),
+                            Driver_ID = new Guid("157c8576-cf6a-4663-8d27-8f565f3ae4e3"),
                             Brand = "Jeep",
+                            DriverStatus = 0,
                             FirstName = "Jurg",
                             LastName = "Colleen",
                             Latitude = 45.27947091909018,
@@ -1749,8 +2117,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("dd85533d-f31c-4c65-ba44-df9aee6ab00b"),
+                            Driver_ID = new Guid("1d92f4b7-61d9-4b99-bb35-824d7f0a0762"),
                             Brand = "INFINITI",
+                            DriverStatus = 0,
                             FirstName = "Jastinder",
                             LastName = "Homero",
                             Latitude = 45.269815899190036,
@@ -1760,8 +2129,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("338e3a06-2656-4159-8c94-89788b9dc2f8"),
+                            Driver_ID = new Guid("7db52d91-5f02-4809-aca7-f14fb691f4de"),
                             Brand = "Mercedes-Benz",
+                            DriverStatus = 0,
                             FirstName = "Marielle",
                             LastName = "Orzai",
                             Latitude = 45.247779667723108,
@@ -1771,8 +2141,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("449366d5-5c8f-40fb-9fc5-f39eae68ae97"),
+                            Driver_ID = new Guid("d63da29b-17e8-4650-93e5-3794d495720f"),
                             Brand = "Ford",
+                            DriverStatus = 0,
                             FirstName = "Cora",
                             LastName = "Otra",
                             Latitude = 45.278586743787962,
@@ -1782,8 +2153,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1e752586-a031-4a1c-85fb-d398b0fcb82c"),
+                            Driver_ID = new Guid("e1bdd0c0-2d4b-445f-b4be-364702aedc03"),
                             Brand = "Lincoln",
+                            DriverStatus = 0,
                             FirstName = "Javid",
                             LastName = "Tranta",
                             Latitude = 45.216149699839988,
@@ -1793,8 +2165,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4d7fa949-2054-4a26-ad71-274ecffa0e38"),
+                            Driver_ID = new Guid("d98218ac-4ac4-4e0a-9bbf-e63dccabf438"),
                             Brand = "Porsche",
+                            DriverStatus = 0,
                             FirstName = "Jen",
                             LastName = "Shar",
                             Latitude = 45.210580578767569,
@@ -1804,8 +2177,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("60f1b0ad-6b82-4ca9-acf2-2b120d26c41d"),
+                            Driver_ID = new Guid("163c41ef-b65a-401c-bdf8-a6d65cb8c023"),
                             Brand = "Volvo",
+                            DriverStatus = 0,
                             FirstName = "Taryn",
                             LastName = "Bener",
                             Latitude = 45.230507721803349,
@@ -1815,8 +2189,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("ea4b884f-1c9b-469a-8a54-7a393cbeec1c"),
+                            Driver_ID = new Guid("1d0ead5c-cbcf-4380-837f-c3918c00848e"),
                             Brand = "Rolls-Royce Motor Cars Limited",
+                            DriverStatus = 0,
                             FirstName = "Henrik",
                             LastName = "Edwin",
                             Latitude = 45.260099746320648,
@@ -1826,8 +2201,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("feb41b55-5596-43fe-8e3c-17c5bb402cb3"),
+                            Driver_ID = new Guid("da170510-7b06-4c7a-8d88-f379bf208b55"),
                             Brand = "Lamborghini",
+                            DriverStatus = 0,
                             FirstName = "Ilhan",
                             LastName = "Reserved",
                             Latitude = 45.269939911723235,
@@ -1837,8 +2213,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("665dfd67-7d96-46ee-9e16-a8fb65960113"),
+                            Driver_ID = new Guid("ddd777f1-1b69-4e57-b733-00d71a188d37"),
                             Brand = "Lincoln",
+                            DriverStatus = 0,
                             FirstName = "Delair",
                             LastName = "Meredith",
                             Latitude = 45.252036208353331,
@@ -1848,8 +2225,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("78b1703f-faf5-4294-8918-4bdf6693a555"),
+                            Driver_ID = new Guid("46197978-562a-4ad7-bcc4-54b049316aa6"),
                             Brand = "BMW",
+                            DriverStatus = 0,
                             FirstName = "Alessandro",
                             LastName = "Ame",
                             Latitude = 45.213878946434399,
@@ -1859,8 +2237,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b0d8ebe6-4bb0-4354-b2d2-2e8dc75e674a"),
+                            Driver_ID = new Guid("309beda4-14d6-42bd-82c3-5f2136bade20"),
                             Brand = "SCION",
+                            DriverStatus = 0,
                             FirstName = "Vanessa",
                             LastName = "Moran",
                             Latitude = 45.243401442719865,
@@ -1870,8 +2249,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("eebb9390-17e9-43f2-8dce-f95891abba9b"),
+                            Driver_ID = new Guid("1e5baac5-4e35-42a1-9d77-58581c1efa24"),
                             Brand = "Lincoln",
+                            DriverStatus = 0,
                             FirstName = "Geri",
                             LastName = "Miii",
                             Latitude = 45.240326613759379,
@@ -1881,8 +2261,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("a9847ef8-bddc-481c-8510-a44d8bbb17a3"),
+                            Driver_ID = new Guid("8a3a96e8-8658-4821-ad16-672b33bef81f"),
                             Brand = "NISSAN",
+                            DriverStatus = 0,
                             FirstName = "Rasika",
                             LastName = "Raimundo",
                             Latitude = 45.291779211384224,
@@ -1892,8 +2273,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("c21adf28-b39d-4178-a90f-9f60afe021b0"),
+                            Driver_ID = new Guid("59fb72f9-63d7-4f97-bda4-4bb145751617"),
                             Brand = "Lamborghini",
+                            DriverStatus = 0,
                             FirstName = "Letizia",
                             LastName = "Kerry",
                             Latitude = 45.281638953906281,
@@ -1903,8 +2285,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("00312a50-3449-415a-84d3-c2d30b5ffa18"),
+                            Driver_ID = new Guid("9c6ad1a7-ad62-434f-a22c-0e6dcc471561"),
                             Brand = "Bentley",
+                            DriverStatus = 0,
                             FirstName = "Ann",
                             LastName = "Canosa",
                             Latitude = 45.204344318934922,
@@ -1914,8 +2297,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1226a00a-5f0d-45da-af59-3e0004b576db"),
+                            Driver_ID = new Guid("586f1ca3-2974-4df1-b427-0777b4452a93"),
                             Brand = "Buick",
+                            DriverStatus = 0,
                             FirstName = "Edie",
                             LastName = "Maeve",
                             Latitude = 45.204068043710627,
@@ -1925,8 +2309,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("736b2bf6-fcf6-4ccf-90d4-86bc77e349bb"),
+                            Driver_ID = new Guid("ace181fe-c970-41eb-b3ab-003f3363b49c"),
                             Brand = "Roush",
+                            DriverStatus = 0,
                             FirstName = "Evangeline",
                             LastName = "Granados",
                             Latitude = 45.255782205655841,
@@ -1936,8 +2321,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b077a869-60af-4e3b-9edb-59a288d7c536"),
+                            Driver_ID = new Guid("65452817-f038-4aab-a40a-020845682046"),
                             Brand = "Mitsubishi Motors Corporation",
+                            DriverStatus = 0,
                             FirstName = "Yev",
                             LastName = "Leeann",
                             Latitude = 45.243827207876294,
@@ -1947,8 +2333,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("73e49a84-b36b-4da9-a1d8-93173fa6e732"),
+                            Driver_ID = new Guid("a414a815-8ad4-48eb-9400-c7658953d57e"),
                             Brand = "FIAT",
+                            DriverStatus = 0,
                             FirstName = "Harold",
                             LastName = "Karl",
                             Latitude = 45.286324628710155,
@@ -1958,8 +2345,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("8eded69e-c29a-46a3-a6e1-b6411c81d0bb"),
+                            Driver_ID = new Guid("031d9bd4-9e0b-4b71-8b31-3ea8af3066a8"),
                             Brand = "Chrysler",
+                            DriverStatus = 0,
                             FirstName = "Ibrahim",
                             LastName = "Alina",
                             Latitude = 45.2993118675817,
@@ -1969,8 +2357,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("f6b354a5-2fc3-4251-ba89-eefd48b1755f"),
+                            Driver_ID = new Guid("9e4e132b-707f-4d9b-862b-3562b25fb7af"),
                             Brand = "RAM",
+                            DriverStatus = 0,
                             FirstName = "Renata",
                             LastName = "Yadi",
                             Latitude = 45.296758424609912,
@@ -1980,8 +2369,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d02c5986-3109-47a4-9c2a-b694c0828c88"),
+                            Driver_ID = new Guid("f25cb865-c6fe-4acf-8b9d-88619e4274e5"),
                             Brand = "TOYOTA",
+                            DriverStatus = 0,
                             FirstName = "Aden",
                             LastName = "Eliza",
                             Latitude = 45.268648133812405,
@@ -1991,8 +2381,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("47838cf6-e1ce-4243-8977-291b42b3beb7"),
+                            Driver_ID = new Guid("3a6e6c5c-9d6d-4c50-8fd4-a4b58e7d53fb"),
                             Brand = "Mini",
+                            DriverStatus = 0,
                             FirstName = "Maurits",
                             LastName = "Paulien",
                             Latitude = 45.296887928208001,
@@ -2002,8 +2393,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("cf73b305-7718-4c06-b775-13ce02988ef4"),
+                            Driver_ID = new Guid("28d5d831-d9ac-46d0-bb8e-8d2226df09e7"),
                             Brand = "McLaren",
+                            DriverStatus = 0,
                             FirstName = "Flora",
                             LastName = "Allesdandro",
                             Latitude = 45.250220306572913,
@@ -2013,8 +2405,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("012bfc89-ec51-48fa-b4b4-73277f28602c"),
+                            Driver_ID = new Guid("cddd65f4-f3fa-41b0-83e2-45327a5c659d"),
                             Brand = "Acura",
+                            DriverStatus = 0,
                             FirstName = "Anais",
                             LastName = "Johnna",
                             Latitude = 45.287676498702332,
@@ -2024,8 +2417,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("cc58a4e5-6cd1-452b-804e-7170b7f5e4c3"),
+                            Driver_ID = new Guid("e107e7e7-4798-4f10-9212-2fb401b80a15"),
                             Brand = "Land Rover",
+                            DriverStatus = 0,
                             FirstName = "Maurits",
                             LastName = "Anurag",
                             Latitude = 45.253925064457675,
@@ -2035,8 +2429,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("91947210-a861-42c7-9345-1d5ac448b2bd"),
+                            Driver_ID = new Guid("a5e7bd68-e110-4dd0-baec-eda7ca4e18ad"),
                             Brand = "MAZDA",
+                            DriverStatus = 0,
                             FirstName = "Callaghan",
                             LastName = "Aiden",
                             Latitude = 45.215384546791014,
@@ -2046,8 +2441,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("82130e47-cde3-4acf-94c1-ac7f92f61d16"),
+                            Driver_ID = new Guid("c1dc07b2-65c8-47cd-aefd-48ccf0346df0"),
                             Brand = "INFINITI",
+                            DriverStatus = 0,
                             FirstName = "Haas",
                             LastName = "Chad",
                             Latitude = 45.288022877311491,
@@ -2057,8 +2453,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("b82eabc6-c0ff-4456-bb54-cf9d1e4dad56"),
+                            Driver_ID = new Guid("4932ad35-7b17-4bb6-8f5e-b865cea211e0"),
                             Brand = "Mini",
+                            DriverStatus = 0,
                             FirstName = "Dianna",
                             LastName = "Michal",
                             Latitude = 45.247323100321054,
@@ -2068,8 +2465,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("11458367-5e6f-4eda-8e15-4552c9469351"),
+                            Driver_ID = new Guid("677cad27-cd40-4fca-9871-e7dcc747d90e"),
                             Brand = "INFINITI",
+                            DriverStatus = 0,
                             FirstName = "Deepti",
                             LastName = "Devara",
                             Latitude = 45.275913260410107,
@@ -2079,8 +2477,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("10d96117-4fdb-459d-a340-013da75b244a"),
+                            Driver_ID = new Guid("9cd59bfa-851a-4d40-ad41-6ef10346554e"),
                             Brand = "Pagani Automobili S.p.A.",
+                            DriverStatus = 0,
                             FirstName = "Morrissey",
                             LastName = "Kellie",
                             Latitude = 45.274651670577768,
@@ -2090,8 +2489,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("561dd4d4-081e-4916-970d-dd91ba615f5c"),
+                            Driver_ID = new Guid("1dfb1e61-1bd4-47a9-ac6c-814ecd77ff6d"),
                             Brand = "Aston Martin Lagonda Ltd",
+                            DriverStatus = 0,
                             FirstName = "Elliot",
                             LastName = "Loiselin",
                             Latitude = 45.222723321894421,
@@ -2101,8 +2501,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("fe9d6d97-a9f5-4f13-a507-deeafd24ee1d"),
+                            Driver_ID = new Guid("9434d329-072f-4357-b198-4d6262697f0c"),
                             Brand = "Cadillac",
+                            DriverStatus = 0,
                             FirstName = "Olga",
                             LastName = "Kristen",
                             Latitude = 45.29340112834867,
@@ -2112,8 +2513,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6194844d-18c0-4b67-b47a-072b43969c43"),
+                            Driver_ID = new Guid("7a9a13b8-e596-4d82-bd92-c304672e3ebb"),
                             Brand = "Roush",
+                            DriverStatus = 0,
                             FirstName = "Dahlia",
                             LastName = "Pandora",
                             Latitude = 45.222647874969191,
@@ -2123,8 +2525,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4d13cbe6-6069-4546-a018-b6e723b0b9ed"),
+                            Driver_ID = new Guid("50ab00a8-4d6f-41bf-9ec2-c59c337d8f9a"),
                             Brand = "Porsche",
+                            DriverStatus = 0,
                             FirstName = "Vlada",
                             LastName = "Marisela",
                             Latitude = 45.275549215170642,
@@ -2134,8 +2537,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4b23c030-52a0-4224-bb9f-51da2d7dcd24"),
+                            Driver_ID = new Guid("604fbcbd-722c-4146-906e-20614a46dc2d"),
                             Brand = "Ford",
+                            DriverStatus = 0,
                             FirstName = "Leif",
                             LastName = "Nalini",
                             Latitude = 45.281617289392479,
@@ -2145,8 +2549,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("3b8bc7ee-ba7f-415b-9dee-5950b22a5acd"),
+                            Driver_ID = new Guid("625e216e-f732-4fbc-b3dd-737c6af443fe"),
                             Brand = "Lamborghini",
+                            DriverStatus = 0,
                             FirstName = "Aparna",
                             LastName = "Segundo",
                             Latitude = 45.225215199148884,
@@ -2156,8 +2561,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4c583def-e8f9-4e41-b1c0-c40d66c60266"),
+                            Driver_ID = new Guid("44375e74-41c3-4f70-805f-fd0b4552bb69"),
                             Brand = "Audi",
+                            DriverStatus = 0,
                             FirstName = "Carling",
                             LastName = "Angeles",
                             Latitude = 45.256456267336631,
@@ -2167,8 +2573,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e8a4de0f-3585-4101-88db-0b05bf83c859"),
+                            Driver_ID = new Guid("b284dcb9-c1cc-4bb2-bbf8-88bbb222ff7d"),
                             Brand = "INFINITI",
+                            DriverStatus = 0,
                             FirstName = "Bici",
                             LastName = "Travis",
                             Latitude = 45.201686751190202,
@@ -2178,8 +2585,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("4f74e8be-f273-42fb-9cdf-7c9d59978f3e"),
+                            Driver_ID = new Guid("37182582-e7bf-457e-bafd-922c1c7cf4af"),
                             Brand = "Aston Martin Lagonda Ltd",
+                            DriverStatus = 0,
                             FirstName = "Oracio",
                             LastName = "Richie",
                             Latitude = 45.224688333074994,
@@ -2189,8 +2597,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("9cb38bd0-bdb5-4d96-bfb5-136902f63d0d"),
+                            Driver_ID = new Guid("08d8bd4b-6ad4-412a-836d-bd07b5ae8e15"),
                             Brand = "Porsche",
+                            DriverStatus = 0,
                             FirstName = "Lily",
                             LastName = "Eugenia",
                             Latitude = 45.257195153791159,
@@ -2200,8 +2609,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("1db013fa-1dc9-45ea-bb49-0e00892f4ce8"),
+                            Driver_ID = new Guid("bdc2aae9-6bb7-4d21-9e5b-8b632fc58cc4"),
                             Brand = "Lincoln",
+                            DriverStatus = 0,
                             FirstName = "Gert",
                             LastName = "Andres",
                             Latitude = 45.279225594403293,
@@ -2211,8 +2621,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("6866345b-d0b0-435a-8f43-afbec8edb622"),
+                            Driver_ID = new Guid("af9d3591-ec3b-41d3-b0d6-c383a9093bf9"),
                             Brand = "Honda",
+                            DriverStatus = 0,
                             FirstName = "Talbot",
                             LastName = "Carwen",
                             Latitude = 45.250169050776421,
@@ -2222,8 +2633,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("5fd1ff5c-fd0f-4e08-9c7e-ae821de72b7f"),
+                            Driver_ID = new Guid("efe8920d-3d88-41fb-a286-4f509bcb72ed"),
                             Brand = "Volvo",
+                            DriverStatus = 0,
                             FirstName = "Emma",
                             LastName = "Tasha",
                             Latitude = 45.285854370015166,
@@ -2233,8 +2645,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("00384807-3830-4a0a-a3ad-cc52f2bbbd87"),
+                            Driver_ID = new Guid("064059c8-b22d-48b4-a9a8-f563c0e34fe1"),
                             Brand = "TOYOTA",
+                            DriverStatus = 0,
                             FirstName = "Henry",
                             LastName = "Violoncella",
                             Latitude = 45.220604547812769,
@@ -2244,8 +2657,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("d906ebce-c7bc-4cc4-a0a1-f5594d458ab8"),
+                            Driver_ID = new Guid("e3bb07fa-4f63-48c0-8c6a-b0ef4665c67a"),
                             Brand = "Roush",
+                            DriverStatus = 0,
                             FirstName = "Iva",
                             LastName = "Sloane",
                             Latitude = 45.218399244374908,
@@ -2255,8 +2669,9 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Driver_ID = new Guid("e2fd1e97-26a8-4f50-bcb5-edad4e2bb6bc"),
+                            Driver_ID = new Guid("725a1e36-32eb-4bc2-bbe4-d5bb623b7e34"),
                             Brand = "Mini",
+                            DriverStatus = 0,
                             FirstName = "Larae",
                             LastName = "Lindsey",
                             Latitude = 45.288988349342716,
@@ -2275,26 +2690,29 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Driver_ID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("PassengerLastname")
+                    b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("PassengerName")
+                    b.Property<string>("Lastname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<double>("PassengersLatitude")
+                    b.Property<double?>("PassengersLatitude")
                         .HasColumnType("float");
 
-                    b.Property<double>("PassengersLongitude")
+                    b.Property<double?>("PassengersLongitude")
                         .HasColumnType("float");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PassengerId");
 
@@ -2306,69 +2724,69 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            PassengerId = new Guid("c7423a0c-aef3-4057-9329-32c4c1171330"),
+                            PassengerId = new Guid("3fd5e68c-da0f-4f33-8bcf-86e8d2a099bb"),
                             Birthday = new DateTime(1993, 6, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "raca93@gmail.com",
-                            PassengerLastname = "Bjelic",
-                            PassengerName = "Radivoje",
+                            FirstName = "Radivoje",
+                            Lastname = "Bjelic",
                             PassengersLatitude = 45.290568287681893,
-                            PassengersLongitude = 19.924187873005128
+                            PassengersLongitude = 19.924187873005128,
+                            Password = "dasd121231"
                         },
                         new
                         {
-                            PassengerId = new Guid("d6ecccc1-13e7-4b8b-8fa0-e2a93e77977e"),
+                            PassengerId = new Guid("30546a36-a2af-4b41-ad50-4f3f1245c011"),
                             Birthday = new DateTime(1987, 11, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "ana@example.com",
-                            PassengerLastname = "Ivanovic",
-                            PassengerName = "Ana",
+                            FirstName = "Ana",
+                            Lastname = "Ivanovic",
                             PassengersLatitude = 44.786568287681888,
-                            PassengersLongitude = 20.448921673005128
+                            PassengersLongitude = 20.448921673005128,
+                            Password = "dasd1w1231"
                         },
                         new
                         {
-                            PassengerId = new Guid("bedb1cbd-42ce-486a-bb9e-6a865239934a"),
+                            PassengerId = new Guid("777fbf4a-99c3-4e2c-b151-c910a35decb0"),
                             Birthday = new DateTime(1990, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "marko@example.com",
-                            PassengerLastname = "Petrovic",
-                            PassengerName = "Marko",
+                            FirstName = "Marko",
+                            Lastname = "Petrovic",
                             PassengersLatitude = 43.32090222876819,
-                            PassengersLongitude = 21.895758973005126
+                            PassengersLongitude = 21.895758973005126,
+                            Password = "dasd1tr231"
                         },
                         new
                         {
-                            PassengerId = new Guid("06775d5a-abc9-45a6-b72d-389a960875b5"),
+                            PassengerId = new Guid("39c413cd-570f-444f-a72e-5bf192b09f94"),
                             Birthday = new DateTime(1992, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "jelena@example.com",
-                            PassengerLastname = "Jankovic",
-                            PassengerName = "Jelena",
+                            FirstName = "Jelena",
+                            Lastname = "Jankovic",
                             PassengersLatitude = 44.012793528768192,
-                            PassengersLongitude = 20.91142273005126
+                            PassengersLongitude = 20.91142273005126,
+                            Password = "daswwq21231"
                         },
                         new
                         {
-                            PassengerId = new Guid("dc2b9d70-c09e-47cd-b17c-d6b12f080b40"),
+                            PassengerId = new Guid("a27c1b52-b6c2-4306-ba58-4ab308f78e15"),
                             Birthday = new DateTime(1985, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "nikola@example.com",
-                            PassengerLastname = "Nikolic",
-                            PassengerName = "Nikola",
+                            FirstName = "Nikola",
+                            Lastname = "Nikolic",
                             PassengersLatitude = 45.26713522876819,
-                            PassengersLongitude = 19.833549673005127
+                            PassengersLongitude = 19.833549673005127,
+                            Password = "dasd1gfh31"
                         },
                         new
                         {
-                            PassengerId = new Guid("2428420c-6bd0-4fc6-a52b-7f29c070d023"),
+                            PassengerId = new Guid("ecc2ead5-33be-4110-ad08-6e865b9088a5"),
                             Birthday = new DateTime(1994, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Driver_ID = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "marija@example.com",
-                            PassengerLastname = "Maric",
-                            PassengerName = "Marija",
+                            FirstName = "Marija",
+                            Lastname = "Maric",
                             PassengersLatitude = 44.01652128768189,
-                            PassengersLongitude = 21.00585973005126
+                            PassengersLongitude = 21.00585973005126,
+                            Password = "dasd1ghjbs231"
                         });
                 });
 
@@ -2379,7 +2797,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<Guid>("RideId")
                         .HasColumnType("uniqueidentifier");
@@ -2389,7 +2808,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("RatingId");
 
-                    b.ToTable("Rating");
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("RadivojeBjelic_DeltaDrive_Delta.Models.Ride", b =>
@@ -2452,6 +2871,57 @@ namespace Infrastructure.Migrations
                     b.ToTable("Rides");
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("RadivojeBjelic_DeltaDrive_Delta.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("RadivojeBjelic_DeltaDrive_Delta.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RadivojeBjelic_DeltaDrive_Delta.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("RadivojeBjelic_DeltaDrive_Delta.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("RadivojeBjelic_DeltaDrive_Delta.Models.Driver", b =>
                 {
                     b.HasOne("RadivojeBjelic_DeltaDrive_Delta.Models.Passenger", null)
@@ -2466,7 +2936,7 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("Driver_ID1");
 
                     b.HasOne("RadivojeBjelic_DeltaDrive_Delta.Models.Passenger", "Passenger")
-                        .WithMany()
+                        .WithMany("Rides")
                         .HasForeignKey("PassengerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2485,6 +2955,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("RadivojeBjelic_DeltaDrive_Delta.Models.Passenger", b =>
                 {
                     b.Navigation("Driver");
+
+                    b.Navigation("Rides");
                 });
 #pragma warning restore 612, 618
         }

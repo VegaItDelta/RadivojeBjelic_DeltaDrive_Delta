@@ -3,20 +3,20 @@ using CsvHelper;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Reflection.Emit;
-using DbContext = Microsoft.EntityFrameworkCore.DbContext;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace RadivojeBjelic_DeltaDrive_Delta.Models
 {
-    public class DriversDBContext : DbContext
+    public class DriversDBContext : IdentityDbContext<ApplicationUser>
     {
-        List<Driver> drivers = new List<Driver>();
+        List<Driver> drivers = new List<Driver>();  
 
         public DriversDBContext(DbContextOptions<DriversDBContext> options)
             : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(typeof(DriversDBContext).Assembly);
             InitializeAndSeedDatabase(@"./data/delta-drive.csv");
 
@@ -32,8 +32,8 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
                 {
                     PassengerId = Guid.NewGuid(),
                     Email = "raca93@gmail.com",
-                    PassengerName = "Radivoje",
-                    PassengerLastname = "Bjelic",
+                    FirstName = "Radivoje",
+                    Lastname = "Bjelic",
                     PassengersLatitude = 45.29056828768189,
                     PassengersLongitude = 19.924187873005126,
                     Birthday = new DateTime(1993, 6, 22)
@@ -42,8 +42,8 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
                 {
                     PassengerId = Guid.NewGuid(),
                     Email = "ana@example.com",
-                    PassengerName = "Ana",
-                    PassengerLastname = "Ivanovic",
+                    FirstName = "Ana",
+                    Lastname = "Ivanovic",
                     PassengersLatitude = 44.78656828768189,
                     PassengersLongitude = 20.448921673005126,
                     Birthday = new DateTime(1987, 11, 6)
@@ -52,8 +52,8 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
                 {
                     PassengerId = Guid.NewGuid(),
                     Email = "marko@example.com",
-                    PassengerName = "Marko",
-                    PassengerLastname = "Petrovic",
+                    FirstName = "Marko",
+                    Lastname = "Petrovic",
                     PassengersLatitude = 43.320902228768189,
                     PassengersLongitude = 21.895758973005126,
                     Birthday = new DateTime(1990, 5, 15)
@@ -62,8 +62,8 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
                 {
                     PassengerId = Guid.NewGuid(),
                     Email = "jelena@example.com",
-                    PassengerName = "Jelena",
-                    PassengerLastname = "Jankovic",
+                    FirstName = "Jelena",
+                    Lastname = "Jankovic",
                     PassengersLatitude = 44.012793528768189,
                     PassengersLongitude = 20.91142273005126,
                     Birthday = new DateTime(1992, 3, 22)
@@ -72,8 +72,8 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
                 {
                     PassengerId = Guid.NewGuid(),
                     Email = "nikola@example.com",
-                    PassengerName = "Nikola",
-                    PassengerLastname = "Nikolic",
+                    FirstName = "Nikola",
+                    Lastname = "Nikolic",
                     PassengersLatitude = 45.267135228768189,
                     PassengersLongitude = 19.833549673005126,
                     Birthday = new DateTime(1985, 8, 30)
@@ -82,14 +82,14 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
                 {
                     PassengerId = Guid.NewGuid(),
                     Email = "marija@example.com",
-                    PassengerName = "Marija",
-                    PassengerLastname = "Maric",
+                    FirstName = "Marija",
+                    Lastname = "Maric",
                     PassengersLatitude = 44.01652128768189,
                     PassengersLongitude = 21.00585973005126,
                     Birthday = new DateTime(1994, 12, 10)
                 }
 
-            );
+            ); ;
         }
 
         public DbSet<Driver> Drivers { get; set; }
