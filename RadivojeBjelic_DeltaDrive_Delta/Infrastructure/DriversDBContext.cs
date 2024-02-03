@@ -14,8 +14,23 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
         public DriversDBContext(DbContextOptions<DriversDBContext> options)
             : base(options) { }
 
+        public DbSet<Driver> Drivers { get; set; }
+        public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<Ride> Rides { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Ride>()
+                .HasOne(r => r.Passenger)
+                .WithMany()
+                .HasForeignKey(r => r.PassengerId);
+
+            builder.Entity<Ride>()
+                .HasOne(r => r.Driver)
+                .WithMany()
+                .HasForeignKey(r => r.Driver_ID);
+
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(typeof(DriversDBContext).Assembly);
             InitializeAndSeedDatabase(@"./data/delta-drive.csv");
@@ -92,10 +107,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
             ); ;
         }
 
-        public DbSet<Driver> Drivers { get; set; }
-        public DbSet<Passenger> Passengers { get; set; }
-        public DbSet<Ride> Rides { get; set; }
-        public DbSet<Rating> Ratings { get; set; }
+        
 
         private void InitializeAndSeedDatabase(string csvFilePath)
         {
@@ -121,7 +133,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
                 int i = 0;
                 foreach (var driveRowObject in driveRowObjects)
                 {
-                    //Ograničen upis na 100 redova zbog pokretenja inicijalne migracije
+                    //Ograničen upis na 100 redova zbog pokretenja inicijalne migracije, na ceo fajl od 240k mi racunar fejluje
                     if (i >= 100)
                     {
                         break;

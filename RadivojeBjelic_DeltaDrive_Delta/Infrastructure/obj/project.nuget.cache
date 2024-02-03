@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "I5MiASOGqHLtd4Zc4z9+ste/asjxRvjzmSviGwoOvguClowhwAbEf4Li+yC1VbG+R61EqDYgGqkrTU5nlVUZrQ==",
+  "dgSpecHash": "DtMtPv9p1gkG/WCQFug9w2dYviWINe+51oBn7/zk1cuQmZDlpK4OETD2rSCPZ7ZWY/dujuU7cfIB9grVyM4O7Q==",
   "success": true,
   "projectFilePath": "/Users/raca/Desktop/RadivojeBjelic_DeltaDrive_Delta/RadivojeBjelic_DeltaDrive_Delta/Infrastructure/Infrastructure.csproj",
   "expectedPackageFiles": [
     "/Users/raca/.nuget/packages/automapper/10.1.1/automapper.10.1.1.nupkg.sha512",
     "/Users/raca/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/8.1.1/automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "/Users/raca/.nuget/packages/csvhelper/30.0.3/csvhelper.30.0.3.nupkg.sha512",
-    "/Users/raca/.nuget/packages/entityframework/6.0.0/entityframework.6.0.0.nupkg.sha512",
     "/Users/raca/.nuget/packages/geocoordinate.netcore/1.0.0.1/geocoordinate.netcore.1.0.0.1.nupkg.sha512",
     "/Users/raca/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/raca/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
@@ -82,16 +81,5 @@
     "/Users/raca/.nuget/packages/system.text.encodings.web/4.5.0/system.text.encodings.web.4.5.0.nupkg.sha512",
     "/Users/raca/.nuget/packages/system.windows.extensions/4.7.0/system.windows.extensions.4.7.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'EntityFramework 6.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
-      "libraryId": "EntityFramework",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  "logs": []
 }

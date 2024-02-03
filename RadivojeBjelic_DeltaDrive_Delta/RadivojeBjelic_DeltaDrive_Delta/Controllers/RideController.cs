@@ -49,7 +49,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
         }
         //Bukiranje voznje
         [HttpPost("bookRide")]
-        public IActionResult BookARide([FromBody]Ride ride, [FromQuery] Guid driverId)
+        public IActionResult BookARide([FromBody]RideDTO rideDTO, [FromQuery] Guid driverId)
         {
             try
             {
@@ -57,15 +57,34 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                _rideRepository.BookARide(ride, driverId);
-                return CreatedAtAction("GetRide", new { id = ride.RideId }, ride);
+                var ride = _mapper.Map<Ride>(rideDTO);
+                var result=_rideRepository.BookARide(ride, driverId);
+                return CreatedAtAction("GetRide", new { id = result.RideId }, result);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("nearestDrivers/{passengerLatitude}/{passengerLongitude}")]
+        public IActionResult GetNearestDrivers(double passengerLatitude, double passengerLongitude)
+        {
+            try
+            {
+                var selectedDrivers = _rideRepository.GetNearestTenDrivers(passengerLatitude,passengerLongitude);
+                if (selectedDrivers == null)
+                {
+                    return NotFound();
+                }
 
+                return Ok(_mapper.Map<IEnumerable<DriverDTO>>(selectedDrivers));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         //ova metoda je u kontroleru iz razloga sto bi mozda mogla da postoji opcija da korisnik pre zakazivanja izracuna cenu ukoliko to zeli
         [HttpGet("calculateTotalPrice")]
         public IActionResult CalculateTotalPrice([FromQuery]Guid driverId, [FromQuery] double startLatitude, [FromQuery]double startLongitude, [FromQuery] double EndLatitude,
@@ -82,8 +101,8 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
             }
         }
         //simulacija same voznje, doduse uradjena je za linearno kretanje, u realnom scenariju bi trebalo da se ukljuci neki google maps API ili tako nesto
-        [HttpPost("simulateRide/{rideId}")]
-        public async Task<IActionResult> SimulateRide(Guid rideId)
+        [HttpPost("simulateRide")]
+        public async Task<IActionResult> SimulateRide([FromQuery] Guid rideId)
         {
             try
             {

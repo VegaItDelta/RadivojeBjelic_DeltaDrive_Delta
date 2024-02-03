@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain;
 using GeoCoordinatePortable;
 using Microsoft.EntityFrameworkCore;
 using RadivojeBjelic_DeltaDrive_Delta.Interfaces;
@@ -20,31 +21,56 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
         }
         public Ride GetById(Guid id)
         {
-            return _context.Rides.FirstOrDefault(r => r.RideId == id);
+            return _context.Rides
+                .Include(p => p.Passenger)
+                .Include(r => r.Driver)
+                .Include(rtg => rtg.PassengerRating)
+                .FirstOrDefault(r => r.RideId == id);
         }
-        public void BookARide(Ride ride,Guid driverId)
+        public Ride BookARide(Ride ride, Guid driverId)
         {
             var selectedDriver = _context.Drivers.Find(driverId);
+            var passenger = _context.Passengers.Find(ride.PassengerId);
+            
+            if (passenger == null)
+            {
+                throw new Exception("Passenger not found!");
+            }
             if (selectedDriver == null)
             {
                 throw new Exception("Selected driver not found");
             }
-            bool isAccepted = TryAcceptRideRequest(driverId, ride.RideId);
+            bool isAccepted = TryAcceptRideRequest(driverId);
 
-            if (isAccepted )
+            //var ride = new Ride();
+            if (isAccepted)
             {
-                selectedDriver.DriverStatus = DriversStatus.Busy;
-                ride.Driver_ID = driverId;
-                ride.TotalPrice = CalculateTotalPrice(driverId,ride.StartLatitude, ride.StartLongitude, ride.EndLatitude, ride.EndLongitude);
-                _context.Add(ride);
-                _context.SaveChanges();
+                try
+                {
+                    selectedDriver.DriverStatus = DriversStatus.Busy;
+                    ride.Driver_ID = driverId;
+                    ride.TotalPrice = CalculateTotalPrice(driverId,ride.StartLatitude, ride.StartLongitude, ride.EndLatitude, ride.EndLongitude);
+                    ride.Passenger = passenger;
+                    ride.Driver = selectedDriver;
+                    ride.Passenger.PassengersLatitude = ride.StartLatitude;
+                    ride.Passenger.PassengersLongitude = ride.StartLongitude;
+                    _context.Add(ride);
+                    _context.SaveChanges();
+                    return ride;
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
             }
             else
             {
                 //poziva se samo kada je voznja odbijena i generise random razlog odluke,
                 //u realnom scenariju vozac bi sam naveo razloge odbijanja, u ovom slucaju ide nasumicno
-                GenerateRejectionReason(ride);
-                _context.SaveChanges();
+                return GenerateRejectionReason();
+                
+                //_context.SaveChanges();
             }
         }
 
@@ -62,9 +88,24 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
         public IEnumerable<Driver> GetNearestTenDrivers(double passengerLatitude, double passengerLongitude)
         {
             var userLocation = new GeoCoordinate(passengerLatitude, passengerLongitude);
+            //pravi okvirnu razdaljinu od korisnikove lokacije recimo 10km priblizno, da se pribave vozaci
+            //koji su u tom dometu zbog filtriranja iz baze, da se ne pribavljaju uvek
+            //svi raspolozivi vozaci iz baze bez obzira na udaljenost
+            double latitudeDistance = 0.1;
+            double longitudeDistance = 0.1;
 
-            var nearestDrivers = _context.Drivers
-            .Where(d => d.DriverStatus == DriversStatus.Available)
+            double minLatitude = passengerLatitude - latitudeDistance;
+            double maxLatitude = passengerLatitude + latitudeDistance;
+            double minLongitude = passengerLongitude - longitudeDistance;
+            double maxLongitude = passengerLongitude + longitudeDistance;
+
+            var driversInRange = _context.Drivers
+            .Where(d => d.DriverStatus == DriversStatus.Available &&
+                        d.Latitude >= minLatitude && d.Latitude <= maxLatitude &&
+                        d.Longitude >= minLongitude && d.Longitude <= maxLongitude)
+            .ToList();
+
+            var nearestDrivers = driversInRange
             .Select(d => new
             {
                 Driver = d,
@@ -90,32 +131,28 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
                 throw new Exception("Driver not found!");
             }
 
-            double speed = 60.0 * 1000 / 3600; //60km/h pretvoreno u metre po sekundi
+            double speed = 60.0 * 1000 / 3600; // 60 km/h prevedeno u metre po sekundi
 
             var startCoord = new GeoCoordinate(ride.StartLatitude, ride.StartLongitude);
             var endCoord = new GeoCoordinate(ride.EndLatitude, ride.EndLongitude);
 
             double totalDistance = startCoord.GetDistanceTo(endCoord);
-            double distanceCovered = 0.0;
-            while (distanceCovered < totalDistance)
-            {
-                double distance = speed * 5;//predjeni put za 5 sekundi
-                distanceCovered += distance;
 
-                if (distanceCovered > totalDistance)
-                {
-                    distanceCovered = totalDistance;
-                }
-                await Task.Delay(5000);//osvezava se lokacija na svakih 5 sekundi
-            }
-            //ovde zadajem vozacu novu lokaciju, vodim se razmisljanjem da je njegova lokacija koja se azurira krajnja lokacija voznje
-            //u realnom scenariju bi to bilo praceno konstantno jer nije realno da se sam vozac ne pomera sa te lokacije dok ceka sledecu voznju
+            // izracunavanje ukupnog vremena potrebnog za vožnju na osnovu brzine i ukupne udaljenosti
+            double totalTime = totalDistance / speed;
+
+            // azuriranje lokacije vozača i statusa vožnje
             driver.Latitude = ride.EndLatitude;
             driver.Longitude = ride.EndLongitude;
-            ride.Status = RideStatus.Completed;//menjam status voznje u completed kada se ona zavrsi
+            ride.Status = RideStatus.Completed; // Menjanje statusa vožnje u completed
 
+            
             _context.SaveChanges();
+
+            // Opciono, ako postoji potreba da se simulira zavrsetak voznje nakon odredjenog vremenskog perioda
+            //await Task.Delay(TimeSpan.FromSeconds(totalTime));
         }
+
         public void AddRating(Rating rating)
         {
             _context.Ratings.Add(rating);
@@ -123,33 +160,28 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
         }
         #region Private Methods
 
-        private bool TryAcceptRideRequest(Guid driverId,Guid rideId)
+        private bool TryAcceptRideRequest(Guid driverId)
         {
-            var ride = _context.Rides.Find(rideId);
             var driver = _context.Drivers.Find(driverId);
 
-            if (ride == null || driver == null || driver.DriverStatus != DriversStatus.Available)
+            if ( driver == null || driver.DriverStatus != DriversStatus.Available)
             {
                 throw new Exception("Ride or driver not found!");
             }
 
-            if (_random.NextDouble() > 0.25)//25% sanse da se voznja ne prihvati
+            if (_random.NextDouble() > 0.01)//25% sanse da se voznja ne prihvati
             {
-                ride.Status = Ride.RideStatus.Accepted;
-                ride.StatusMessage = "Ride is accepted by the driver";
-                _context.SaveChanges();
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            
+            return false;
+            
         }
-        private void GenerateRejectionReason(Ride ride)
+        private Ride GenerateRejectionReason()
         {
 
             int reason = _random.Next(1, 4); //imamo 3 razloga za odbijanje generisana
-
+            var ride = new Ride();
             switch (reason)
             {
                 case 1:
@@ -170,6 +202,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Repository
                     break;
 
             }
+            return ride;
         }
 
         

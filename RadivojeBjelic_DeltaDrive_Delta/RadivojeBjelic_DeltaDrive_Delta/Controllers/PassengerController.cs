@@ -32,7 +32,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
         public IActionResult GetPassengers()
         {
             try
-            {
+            { 
                 return Ok(_passengerInterface.GetAll().ProjectTo<PassengerDTO>(_mapper.ConfigurationProvider).ToList());
             }
             catch (Exception ex)
@@ -73,19 +73,8 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult PostPassenger(Passenger passenger)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            _passengerInterface.Add(passenger);
-            return CreatedAtAction("GetPassenger", new { id = passenger.PassengerId }, passenger);
-        }
-
         [HttpPut("{id}")]
-        public IActionResult PutPassenger(Guid id, Passenger passenger)
+        public IActionResult Update(Guid id, Passenger passenger)
         {
             if (!ModelState.IsValid)
             {

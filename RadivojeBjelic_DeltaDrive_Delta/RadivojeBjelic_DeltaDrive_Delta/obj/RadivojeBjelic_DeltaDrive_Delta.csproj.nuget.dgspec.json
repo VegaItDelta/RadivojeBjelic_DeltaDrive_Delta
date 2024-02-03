@@ -186,10 +186,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "EntityFramework": {
-              "target": "Package",
-              "version": "[6.0.0, )"
-            },
             "GeoCoordinate.NetCore": {
               "target": "Package",
               "version": "[1.0.0.1, )"

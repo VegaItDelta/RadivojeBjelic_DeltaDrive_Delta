@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RadivojeBjelic_DeltaDrive_Delta.Models
 {
@@ -24,14 +25,12 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Models
         [Required]
         [Range(-180,180)]
         public double EndLongitude { get; set; }
-        [Required]
-        [Range(1,double.MaxValue)]
-        public decimal TotalPrice { get; set; }
+        public decimal? TotalPrice { get; set; }
         [Required]
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public RideStatus Status { get; set; }
-        public string StatusMessage { get; set; }
+        public string? StatusMessage { get; set; }
         public Passenger? Passenger { get; set; }
         public Rating? PassengerRating { get; set; }
         public Driver? Driver { get; set; }
