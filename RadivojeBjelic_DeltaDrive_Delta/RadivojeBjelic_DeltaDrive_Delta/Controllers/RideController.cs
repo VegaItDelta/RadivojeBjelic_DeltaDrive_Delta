@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationCore;
 using AutoMapper;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -19,12 +20,12 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
     [ApiController]
     public class RideController : Controller
     {
-        private readonly IRideInterface _rideRepository;
+        private readonly IRideService _rideService;
         private readonly IMapper _mapper;
 
-        public RideController(IRideInterface rideRepository, IMapper mapper)
+        public RideController(IRideService rideRepository, IMapper mapper)
         {
-            _rideRepository = rideRepository;
+            _rideService = rideRepository;
             _mapper = mapper;
         }
         //ubaceno zbog CreatedAtAction za vracanje 201 created
@@ -33,7 +34,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
         {
             try
             {
-                var ride = _rideRepository.GetById(id);
+                var ride = _rideService.GetById(id);
                 if (ride == null)
                 {
                     return NotFound();
@@ -58,7 +59,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
                     return BadRequest(ModelState);
                 }
                 var ride = _mapper.Map<Ride>(rideDTO);
-                var result=_rideRepository.BookARide(ride, driverId);
+                var result= _rideService.BookARide(ride, driverId);
                 return CreatedAtAction("GetRide", new { id = result.RideId }, result);
             }
             catch (Exception ex)
@@ -71,7 +72,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
         {
             try
             {
-                var selectedDrivers = _rideRepository.GetNearestTenDrivers(passengerLatitude,passengerLongitude);
+                var selectedDrivers = _rideService.GetNearestTenDrivers(passengerLatitude,passengerLongitude);
                 if (selectedDrivers == null)
                 {
                     return NotFound();
@@ -85,28 +86,14 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        //ova metoda je u kontroleru iz razloga sto bi mozda mogla da postoji opcija da korisnik pre zakazivanja izracuna cenu ukoliko to zeli
-        [HttpGet("calculateTotalPrice")]
-        public IActionResult CalculateTotalPrice([FromQuery]Guid driverId, [FromQuery] double startLatitude, [FromQuery]double startLongitude, [FromQuery] double EndLatitude,
-            [FromQuery] double EndLongitude)
-        {
-            try
-            {
-                var totalPrice = _rideRepository.CalculateTotalPrice(driverId, startLatitude, startLongitude, EndLatitude, EndLongitude);
-                return Ok(totalPrice);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+
         //simulacija same voznje, doduse uradjena je za linearno kretanje, u realnom scenariju bi trebalo da se ukljuci neki google maps API ili tako nesto
         [HttpPost("simulateRide")]
         public async Task<IActionResult> SimulateRide([FromQuery] Guid rideId)
         {
             try
             {
-                await _rideRepository.SimulateRide(rideId);
+                await _rideService.SimulateRide(rideId);
                 return Ok();
             }
             catch (Exception ex)
@@ -124,7 +111,7 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                _rideRepository.AddRating(rating);
+                _rideService.AddRating(rating);
                 return Ok();
             }
             catch (Exception ex)

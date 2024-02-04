@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "6a5f411f-bbb0-4a68-9cd3-e6334f605ff1",
+		"name": "DeltaDrive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28140251"
+	},
+	"item": [
+		{
+			"name": "GetNearestDrivers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response is an array of objects\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array').that.is.not.empty;",
+							"    pm.response.json().forEach(function (passenger) {",
+							"        pm.expect(passenger).to.be.an('object').that.has.all.keys('passengerId', 'firstName', 'lastname', 'birthday');",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Each passengerId is a string\", function () {",
+							"    pm.response.json().forEach(function (passenger) {",
+							"        pm.expect(passenger.passengerId).to.be.a('string');",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Each birthday is a string\", function () {",
+							"    pm.response.json().forEach(function (passenger) {",
+							"        pm.expect(passenger.birthday).to.be.a('string');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdGVyQGdtYWlsLmNvbSIsImp0aSI6ImVlOTJmMjJjLWUyMTAtNGEwMi04ZmFhLWY3YmVkYTI5MWFjOSIsImV4cCI6MTcwNzA0OTUzMiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzOTYiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDM5NiJ9.KS8v8VClmJL12pHpCJ9B8LwV9HUeSJLBNDsohRef494",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:7030/api/Ride/nearestDrivers/45.25566677/19.80384567",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7030",
+					"path": [
+						"api",
+						"Ride",
+						"nearestDrivers",
+						"45.25566677",
+						"19.80384567"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegistrationDeltaDrive",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"tester@gmail.com\",\n  \"password\": \"Test123.\",\n  \"firstName\": \"Test\",\n  \"lastName\": \"Testick\",\n  \"birthday\": \"1996-02-02T13:23:16.052Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7030/api/Authentication/register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7030",
+					"path": [
+						"api",
+						"Authentication",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"tester@gmail.com\",\n  \"password\": \"Test123.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7030/api/Authentication/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7030",
+					"path": [
+						"api",
+						"Authentication",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BookRide",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdGVyQGdtYWlsLmNvbSIsImp0aSI6ImVlOTJmMjJjLWUyMTAtNGEwMi04ZmFhLWY3YmVkYTI5MWFjOSIsImV4cCI6MTcwNzA0OTUzMiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzOTYiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDM5NiJ9.KS8v8VClmJL12pHpCJ9B8LwV9HUeSJLBNDsohRef494",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"PassengerId\": \"a787803b-c493-4b55-277b-08dc2409faa6\",\n  \"StartLatitude\": 45.25566677,\n  \"StartLongitude\": 20.80384567,\n  \"EndLatitude\": 45.77998810,\n  \"EndLongitude\": 20.32999924,\n  \"StartTime\": \"2023-01-01T10:00:00\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7030/api/Ride/bookRide?driverId=6925fa71-5df0-40dd-999f-f5ec1f6ebed2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7030",
+					"path": [
+						"api",
+						"Ride",
+						"bookRide"
+					],
+					"query": [
+						{
+							"key": "driverId",
+							"value": "6925fa71-5df0-40dd-999f-f5ec1f6ebed2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SimulateRide",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdGVyQGdtYWlsLmNvbSIsImp0aSI6ImVlOTJmMjJjLWUyMTAtNGEwMi04ZmFhLWY3YmVkYTI5MWFjOSIsImV4cCI6MTcwNzA0OTUzMiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzOTYiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDM5NiJ9.KS8v8VClmJL12pHpCJ9B8LwV9HUeSJLBNDsohRef494",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7030/api/Ride/simulateRide?rideId=f51b52c3-e0b2-4ba5-9ca9-08dc256bd6cd",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7030",
+					"path": [
+						"api",
+						"Ride",
+						"simulateRide"
+					],
+					"query": [
+						{
+							"key": "rideId",
+							"value": "f51b52c3-e0b2-4ba5-9ca9-08dc256bd6cd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetHistoryOfRides",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdGVyQGdtYWlsLmNvbSIsImp0aSI6ImVlOTJmMjJjLWUyMTAtNGEwMi04ZmFhLWY3YmVkYTI5MWFjOSIsImV4cCI6MTcwNzA0OTUzMiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzOTYiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDM5NiJ9.KS8v8VClmJL12pHpCJ9B8LwV9HUeSJLBNDsohRef494",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7030/api/Passenger/rides/?passengerId=a787803b-c493-4b55-277b-08dc2409faa6",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7030",
+					"path": [
+						"api",
+						"Passenger",
+						"rides",
+						""
+					],
+					"query": [
+						{
+							"key": "passengerId",
+							"value": "a787803b-c493-4b55-277b-08dc2409faa6"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,38 +1,40 @@
 ﻿<Properties StartupConfiguration="{8AF1FBB9-8C4E-40D2-9832-EB4F248C639C}|https">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.RadivojeBjelic__DeltaDrive__Delta PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Infrastructure/DriversDBContext.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="RadivojeBjelic_DeltaDrive_Delta/Program.cs">
     <Files>
-      <File FileName="ApplicationCore/IRideInterface.cs" Line="17" Column="1" />
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Program.cs" Line="16" Column="2" />
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Controllers/RideController.cs" Line="24" Column="1" />
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Controllers/AuthenticationController.cs" Line="117" Column="1" />
-      <File FileName="Domain/ApplicationUser.cs" Line="18" Column="1" />
-      <File FileName="RadivojeBjelic_DeltaDrive_Delta/appsettings.json" Line="15" Column="46" />
-      <File FileName="Domain/RegistrationDTO.cs" Line="23" Column="1" />
-      <File FileName="Domain/Passenger.cs" Line="15" Column="9" />
-      <File FileName="Infrastructure/DriversDBContext.cs" Line="6" Column="57" />
-      <File FileName="Infrastructure/RideRepository.cs" Line="13" Column="52" />
+      <File FileName="Infrastructure/Repository/PassengerRepository.cs" Line="48" Column="35" />
+      <File FileName="ApplicationCore/Interfaces/IPassengerInterface.cs" />
+      <File FileName="Domain/Mapping/DeltaDriveProfile.cs" />
+      <File FileName="Domain/Models/Passenger.cs" />
+      <File FileName="Domain/DTOs/PassengerDTO.cs" />
+      <File FileName="Domain/Models/Rating.cs" />
+      <File FileName="Domain/Models/Ride.cs" />
+      <File FileName="Domain/Models/Driver.cs" />
+      <File FileName="Domain/DTOs/RegistrationDTO.cs" />
+      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Controllers/AuthenticationController.cs" />
+      <File FileName="ApplicationCore/Services/RideService.cs" />
+      <File FileName="RadivojeBjelic_DeltaDrive_Delta_Test/Usings.cs" />
+      <File FileName="Infrastructure/Repository/RideRepository.cs" />
+      <File FileName="ApplicationCore/Interfaces/IRideInterface.cs" />
+      <File FileName="RadivojeBjelic_DeltaDrive_Delta/Program.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="RadivojeBjelic_DeltaDrive_Delta" expanded="True">
-            <Node name="ApplicationCore" expanded="True" />
-            <Node name="Infrastructure">
-              <Node name="DriversDBContext.cs" selected="True" />
-            </Node>
-            <Node name="RadivojeBjelic_DeltaDrive_Delta">
-              <Node name="Controllers" expanded="True" />
-            </Node>
-          </Node>
+          <Node name="RadivojeBjelic_DeltaDrive_Delta" expanded="True" />
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="RadivojeBjelic_DeltaDrive_Delta" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.RadivojeBjelic__DeltaDrive__Delta PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

@@ -9,4 +9,15 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="GeoCoordinate.NetCore" Version="1.0.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Interfaces\" />
+    <None Remove="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
 </Project>

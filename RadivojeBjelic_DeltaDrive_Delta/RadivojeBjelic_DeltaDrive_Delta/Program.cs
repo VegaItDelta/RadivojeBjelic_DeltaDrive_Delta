@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Text.Json;
+using ApplicationCore;
 using Domain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -66,7 +67,8 @@ public class Program
 
         builder.Services.AddAutoMapper(typeof(DeltaDriveProfile));
 
-        builder.Services.AddScoped<IRideInterface, RideRepository>();
+        builder.Services.AddScoped<IRideRepository, RideRepository>();
+        builder.Services.AddScoped<IRideService, RideService>();
         builder.Services.AddScoped<IPassengerInterface, PassengerRepository>();
 
         var app = builder.Build();

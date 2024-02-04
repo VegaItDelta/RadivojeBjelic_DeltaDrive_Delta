@@ -40,13 +40,19 @@ namespace RadivojeBjelic_DeltaDrive_Delta.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("rides/{passengerId}")]
-        public IActionResult GetPassengersRideHistory(Guid passengerId)
+        [HttpGet("rides")]
+        public IActionResult GetPassengersRideHistory([FromQuery]Guid passengerId)
         {
             try
             {
-                return Ok(_passengerInterface.GetRideHistory(passengerId).ProjectTo<RideDTO>(_mapper.ConfigurationProvider).ToList());
+                var passengerRides = _passengerInterface.GetRideHistory(passengerId);
+                if (passengerRides == null || !passengerRides.Any())
+                {
+                    return NotFound("No rides found for this passenger.");
+                }
+                return Ok(_mapper.Map<IEnumerable<RideDTO>>(passengerRides));
             }
+
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
